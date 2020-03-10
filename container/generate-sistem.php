@@ -2,12 +2,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Kelola Data Sistem</h1>
+                <h1 class="m-0 text-dark">Generate Sistem</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Kelola Data Sistem</li>
+                    <li class="breadcrumb-item active">Generate Sistem</li>
                 </ol>
             </div><!-- /.col -->
         </div><!-- /.row -->
@@ -81,9 +81,8 @@
                                             <td class="sorting_1"><?= $i ?></td>
                                             <td>Sistem Akademik Mahasiswa Unair</td>
                                             <td>
-                                                <a href="ubah-sistem.php" class="btn btn-sm btn-warning">Ubah</a>
-                                                <a href="detail-sistem.php" class="btn btn-sm btn-info">Detail Aktor</a>
-                                                <a href="hapus-sistem.php" class="btn btn-sm btn-danger">Hapus</a>
+                                                <a href="#" class="btn btn-sm btn-warning">Detail Aktor</a>
+                                                <a href="#" class="btn btn-sm btn-danger">Hapus</a>
                                             </td>                                           
                                         </tr>            
                                     <?php endfor ?>                            

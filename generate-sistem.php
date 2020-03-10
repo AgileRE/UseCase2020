@@ -1,6 +1,6 @@
  
 <?php 
-$page = 1;
+$page = 2;
 include('component/header.php') ?>
 
 

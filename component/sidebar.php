@@ -25,17 +25,17 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->          
           <li class="nav-item">
-            <a href="#" class="nav-link active">
+            <a href="index.php" class="nav-link <?php if($page ==1): echo "active"; endif; ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Kelola Data Sistem
-                <span class="right badge badge-danger">New</span>
+                <!-- <span class="right badge badge-danger">New</span> -->
               </p>
             </a>
           </li>
 
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="generate-sistem.php" class="nav-link <?php if($page ==2): echo "active"; endif; ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Generate Sistem

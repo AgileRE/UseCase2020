@@ -16,7 +16,7 @@ include('component/header.php') ?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <?php include('container/kelola-data-sistem.php') ?>
+    <?php include('container/detail-fitur.php') ?>
   </div>
   <!-- /.content-wrapper -->
 
