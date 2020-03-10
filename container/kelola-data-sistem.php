@@ -19,122 +19,81 @@
 
 <div class="content">
     <div class="container-fluid">
+
+    <div class="row">
+        <div class="col-12">
+            <dic class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Tambah Data Sistem</h3>
+                </div>
+
+                <div class="card-body">
+                    <form action="">
+                        <div class="form-group row">
+                            <label for="inputPassword" class="col-sm-2 col-form-label">Nama Sistem</label>
+                            <div class="col-sm-10">
+                                <input placeholder="Masukkan nama sistem..." type="text" class="form-control" id="inputPassword">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <button class="btn btn-success btn-block" type="submit">+ Tambah Data</button>
+                        </div>
+                    </form>
+                </div>
+            </dic>
+        </div>
+    </div>
         <div class="row">
         <div class="col-12">
     
     
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">DataTable with default features</h3>
+                    <h3 class="card-title">Tabel Data Sistem</h3>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">                        
+                    <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">   
+                                                
+
                         <div class="row">
                             <div class="col-sm-12">
-                                <table id="example1" class="table table-bordered table-striped dataTable" role="grid"
+                                <table id="example1" class="text-center table table-bordered table-striped dataTable" role="grid"
                                     aria-describedby="example1_info">
                                     <thead>
                                         <tr role="row">
                                             <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1"
                                                 colspan="1" aria-sort="ascending"
                                                 aria-label="Rendering engine: activate to sort column descending"
-                                                style="width: 169px;">Rendering engine</th>
+                                                style="width: 5px;">No</th>
                                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
                                                 colspan="1" aria-label="Browser: activate to sort column ascending"
-                                                style="width: 219px;">Browser</th>
+                                                style="width: 219px;">Nama Sistem</th>
                                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
                                                 colspan="1" aria-label="Platform(s): activate to sort column ascending"
-                                                style="width: 194px;">Platform(s)</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
-                                                colspan="1"
-                                                aria-label="Engine version: activate to sort column ascending"
-                                                style="width: 143px;">Engine version</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
-                                                colspan="1" aria-label="CSS grade: activate to sort column ascending"
-                                                style="width: 102px;">CSS grade</th>
+                                                style="width: 194px;">Aksi</th>                                            
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr role="row" class="odd">
-                                            <td class="sorting_1">Gecko</td>
-                                            <td>Firefox 1.0</td>
-                                            <td>Win 98+ / OSX.2+</td>
-                                            <td>1.7</td>
-                                            <td>A</td>
-                                        </tr>
-                                        <tr role="row" class="even">
-                                            <td class="sorting_1">Gecko</td>
-                                            <td>Firefox 1.5</td>
-                                            <td>Win 98+ / OSX.2+</td>
-                                            <td>1.8</td>
-                                            <td>A</td>
-                                        </tr>
-                                        <tr role="row" class="odd">
-                                            <td class="sorting_1">Gecko</td>
-                                            <td>Firefox 2.0</td>
-                                            <td>Win 98+ / OSX.2+</td>
-                                            <td>1.8</td>
-                                            <td>A</td>
-                                        </tr>
-                                        <tr role="row" class="even">
-                                            <td class="sorting_1">Gecko</td>
-                                            <td>Firefox 3.0</td>
-                                            <td>Win 2k+ / OSX.3+</td>
-                                            <td>1.9</td>
-                                            <td>A</td>
-                                        </tr>
-                                        <tr role="row" class="odd">
-                                            <td class="sorting_1">Gecko</td>
-                                            <td>Camino 1.0</td>
-                                            <td>OSX.2+</td>
-                                            <td>1.8</td>
-                                            <td>A</td>
-                                        </tr>
-                                        <tr role="row" class="even">
-                                            <td class="sorting_1">Gecko</td>
-                                            <td>Camino 1.5</td>
-                                            <td>OSX.3+</td>
-                                            <td>1.8</td>
-                                            <td>A</td>
-                                        </tr>
-                                        <tr role="row" class="odd">
-                                            <td class="sorting_1">Gecko</td>
-                                            <td>Netscape 7.2</td>
-                                            <td>Win 95+ / Mac OS 8.6-9.2</td>
-                                            <td>1.7</td>
-                                            <td>A</td>
-                                        </tr>
-                                        <tr role="row" class="even">
-                                            <td class="sorting_1">Gecko</td>
-                                            <td>Netscape Browser 8</td>
-                                            <td>Win 98SE+</td>
-                                            <td>1.7</td>
-                                            <td>A</td>
-                                        </tr>
-                                        <tr role="row" class="odd">
-                                            <td class="sorting_1">Gecko</td>
-                                            <td>Netscape Navigator 9</td>
-                                            <td>Win 98+ / OSX.2+</td>
-                                            <td>1.8</td>
-                                            <td>A</td>
-                                        </tr>
-                                        <tr role="row" class="even">
-                                            <td class="sorting_1">Gecko</td>
-                                            <td>Mozilla 1.0</td>
-                                            <td>Win 95+ / OSX.1+</td>
-                                            <td>1</td>
-                                            <td>A</td>
-                                        </tr>
+                                    <?php for($i=1;$i<100;$i++): ?>
+                                        <tr role="row" class="<?php if($i%2==0): echo "even"; else: echo "odd"; endif?>">
+                                            <td class="sorting_1"><?= $i ?></td>
+                                            <td>Sistem Akademik Mahasiswa Unair</td>
+                                            <td>
+                                                <a href="#" class="btn btn-sm btn-warning">Detail Aktor</a>
+                                                <a href="#" class="btn btn-sm btn-danger">Hapus</a>
+                                            </td>                                           
+                                        </tr>            
+                                    <?php endfor ?>                            
                                     </tbody>
                                     <tfoot>
+                                        
                                         <tr>
-                                            <th rowspan="1" colspan="1">Rendering engine</th>
-                                            <th rowspan="1" colspan="1">Browser</th>
-                                            <th rowspan="1" colspan="1">Platform(s)</th>
-                                            <th rowspan="1" colspan="1">Engine version</th>
-                                            <th rowspan="1" colspan="1">CSS grade</th>
-                                        </tr>
+                                            <th rowspan="1" colspan="1">No</th>
+                                            <th rowspan="1" colspan="1">Nama Sistem</th>
+                                            <th rowspan="1" colspan="1">Aksi</th>
+                                        </tr>                                                                                    
                                     </tfoot>
                                 </table>
                             </div>
