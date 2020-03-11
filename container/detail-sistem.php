@@ -82,7 +82,7 @@
                                             <td>Aktor <?= $i ?></td>
                                             <td>
                                                 <a href="ubah-aktor.php" class="btn btn-sm btn-warning">Ubah</a>
-                                                <a href="detail-aktor.php" class="btn btn-sm btn-info">Detail Fitur</a>
+                                                <a href="detail-aktor.php" class="btn btn-sm btn-info">Data Fitur</a>
                                                 <a href="hapus-aktor.php" class="btn btn-sm btn-danger">Hapus</a>
                                             </td>                                           
                                         </tr>            

@@ -76,13 +76,13 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    <?php for($i=1;$i<100;$i++): ?>
+                                    <?php for($i=1;$i<19;$i++): ?>
                                         <tr role="row" class="<?php if($i%2==0): echo "even"; else: echo "odd"; endif?>">
                                             <td class="sorting_1"><?= $i ?></td>
-                                            <td>Sistem Akademik Mahasiswa Unair</td>
+                                            <td>Sistem Akademik Unair</td>
                                             <td>
                                                 <a href="ubah-sistem.php" class="btn btn-sm btn-warning">Ubah</a>
-                                                <a href="detail-sistem.php" class="btn btn-sm btn-info">Detail Aktor</a>
+                                                <a href="detail-sistem.php" class="btn btn-sm btn-info">Data Aktor</a>
                                                 <a href="hapus-sistem.php" class="btn btn-sm btn-danger">Hapus</a>
                                             </td>                                           
                                         </tr>            

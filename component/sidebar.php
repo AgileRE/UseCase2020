@@ -43,6 +43,15 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="hasil-generate.php" class="nav-link <?php if($page ==3): echo "active"; endif; ?>">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Hasil Generate
+                <!-- <span class="right badge badge-danger">New</span> -->
+              </p>
+            </a>
+          </li>
 
         </ul>
       </nav>

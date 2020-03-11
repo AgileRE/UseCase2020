@@ -19,31 +19,7 @@
 
 <div class="content">
     <div class="container-fluid">
-
-    <div class="row">
-        <div class="col-12">
-            <dic class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Tambah Data Sistem</h3>
-                </div>
-
-                <div class="card-body">
-                    <form action="">
-                        <div class="form-group row">
-                            <label for="inputPassword" class="col-sm-2 col-form-label">Nama Sistem</label>
-                            <div class="col-sm-10">
-                                <input placeholder="Masukkan nama sistem..." type="text" class="form-control" id="inputPassword">
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <button class="btn btn-success btn-block" type="submit">+ Tambah Data</button>
-                        </div>
-                    </form>
-                </div>
-            </dic>
-        </div>
-    </div>
+    
         <div class="row">
         <div class="col-12">
     
@@ -76,16 +52,21 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    <?php for($i=1;$i<100;$i++): ?>
-                                        <tr role="row" class="<?php if($i%2==0): echo "even"; else: echo "odd"; endif?>">
-                                            <td class="sorting_1"><?= $i ?></td>
-                                            <td>Sistem Akademik Mahasiswa Unair</td>
-                                            <td>
-                                                <a href="#" class="btn btn-sm btn-warning">Detail Aktor</a>
-                                                <a href="#" class="btn btn-sm btn-danger">Hapus</a>
+                                    
+                                        <tr role="row" class="odd">
+                                            <td class="sorting_1">1</td>
+                                            <td>Sistem Akademik Unair 1</td>
+                                            <td>                                                
+                                                <a href="#" class="btn btn-sm btn-success">Generate</a>
                                             </td>                                           
-                                        </tr>            
-                                    <?php endfor ?>                            
+                                        </tr>   
+                                        <tr role="row" class="even">
+                                            <td class="sorting_1">2</td>
+                                            <td>Sistem Akademik Unair 2</td>
+                                            <td>                                                
+                                                <a href="#" class="btn btn-sm btn-warning">Generate Ulang</a>
+                                            </td>                                           
+                                        </tr>                                                                    
                                     </tbody>
                                     <tfoot>
                                         

@@ -1,6 +1,6 @@
  
 <?php 
-$page = 2;
+$page = 3;
 include('component/header.php') ?>
 
 
@@ -16,7 +16,7 @@ include('component/header.php') ?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <?php include('container/generate-sistem.php') ?>
+    <?php include('container/hasil-generate.php') ?>
   </div>
   <!-- /.content-wrapper -->
 
