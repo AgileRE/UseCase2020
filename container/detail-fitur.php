@@ -19,15 +19,15 @@
 
  <!-- Main content -->
     <section class="content">
-        
-    
+
+
       <div class="row">
         <div class="col-12">
           <div class="card card-primary">
             <div class="card-header">
               <h3 class="card-title">Data Use Case Scenario</h3>
             </div>
-            <div class="card-body">                
+            <div class="card-body">
             <div class="form-group">
                 <label for="inputName">Nama Aktor</label>
                 <input type="text" id="inputName" class="form-control" value="Aktor 1" disabled>
@@ -46,37 +46,37 @@
               </div>
               <div class="form-group">
                 <label for="inputDescription">Scenario Normal</label>
-<textarea id="inputDescription" class="form-control" rows="4" 
+<textarea id="inputDescription" class="form-control" rows="4"
 placeholder="1. ________
 2. ________
 3. ________"></textarea>
               </div>
               <div class="form-group">
                 <label for="inputDescription">Scenario Alternatif</label>
-                <textarea id="inputDescription" class="form-control" rows="4" 
+                <textarea id="inputDescription" class="form-control" rows="4"
 placeholder="1. ________
 2. ________
 3. ________"></textarea>
               </div>
               <div class="form-group">
                 <label for="inputDescription">Scenario Exception</label>
-                <textarea id="inputDescription" class="form-control" rows="4" 
+                <textarea id="inputDescription" class="form-control" rows="4"
 placeholder="1. ________
 2. ________
 3. ________"></textarea>
               </div>
-              
-              <button class="btn btn-success btn-block">Simpan Data</button>      
+
+              <a href="component-view.php" class="btn btn-success btn-block">Component View</a>
             </div>
 
-            
+
             <!-- /.card-body -->
           </div>
           <!-- /.card -->
-        </div>        
+        </div>
           <!-- /.card -->
 
-          
+
         </div>
         <!-- <div class="row">
         <div class="col-sm-12">
@@ -98,7 +98,7 @@ placeholder="1. ________
                                 style="width: 219px;">Nama Fitur</th>
                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
                                 colspan="1" aria-label="Platform(s): activate to sort column ascending"
-                                style="width: 194px;">Aksi</th>                                            
+                                style="width: 194px;">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -110,24 +110,24 @@ placeholder="1. ________
                                 <a href="ubah-fitur.php" class="btn btn-sm btn-warning">Ubah</a>
                                 <a href="detail-fitur.php" class="btn btn-sm btn-info">Data Use Case Scenario</a>
                                 <a href="hapus-fitur.php" class="btn btn-sm btn-danger">Hapus</a>
-                            </td>                                           
-                        </tr>            
-                    <?php// endfor ?>                            
+                            </td>
+                        </tr>
+                    <?php// endfor ?>
                     </tbody>
                     <tfoot>
-                        
+
                         <tr>
                             <th rowspan="1" colspan="1">No</th>
                             <th rowspan="1" colspan="1">Nama Fitur</th>
                             <th rowspan="1" colspan="1">Aksi</th>
-                        </tr>                                                                                    
+                        </tr>
                     </tfoot>
                 </table>
             </div>
             </div>
         </div>
     </!-->
-      </div>    
+      </div>
     </section>
     <!-- /.content -->
 <!-- /.content -->
