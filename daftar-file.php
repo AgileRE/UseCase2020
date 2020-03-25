@@ -1,68 +1,7 @@
-<?php
-
- $error = "";
-
- if(isset($_POST['submit']))  {
-
-      $post = $_POST;
-
-      $file_folder = "dokumen/"; // folder untuk load file
-
-      if(extension_loaded('zip')) {   //memeriksa ekstensi zip
-
-           if(isset($post['files']) and count($post['files']) > 0) {   //memeriksa file yang dipilih
-
-                $zip = new ZipArchive(); // Load zip library
-
-                $zip_name = time().".zip";  // nama Zip
-
-                if($zip->open($zip_name, ZIPARCHIVE::CREATE)!==TRUE) {   //Membuka file zip untuk memuat file
-
-                     $error .= "* Maaf Download ZIP gagal";
-
-                }
-
-                foreach($post['files'] as $file){
-
-                     $zip->addFile($file_folder.$file); // Menambahkan files ke zip
-
-                }
-
-                $zip->close();
-
-                if(file_exists($zip_name))  {  // Unduh Zip
-
-                     header('Content-type: application/zip');
-
-                     header('Content-Disposition: attachment; filename="'.$zip_name.'"');
-
-                     readfile($zip_name);
-
-                     unlink($zip_name);
-
-                }
-
-           }else {
-
-                $error .= "* Tidak ada file yang di pilih";
-
-           }
-
-      } else {
-
-           $error .= "* Zip ekstensi tidak ada";
-
-      }
-
- }
-
- ?>
-
 <html>
-
       <head>
 
-           <title>Download Dokumen</title>
+           <title>Unduh Dokumen</title>
 
            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
 
@@ -76,13 +15,11 @@
 
            <div class="container">
 
-                <br />
+                <br/>
 
-                <h1>Download Dokumen</h1>
+                <h1>Unduh Dokumen</h1>
 
                 <form name="zips" method="post">
-
-                     <?php echo $error; ?>
 
                      <table class="table table-bordered">
 
@@ -93,42 +30,23 @@
                                <th>Dokumen</th>
 
                           </tr>
+                          <?php
+                          $check = scandir("dokumen");
+                          for ($a = 2;$a < count($check);$a++){?>
+                            <tr>
+
+                                 <td><input type="checkbox" name="files[]" value="<?php echo $check[$a]?>" /></td>
+
+                                 <td><?php echo $check[$a]?></td>
+
+                            </tr>
+                          <?php
+                          }
+                           ?>
 
                           <tr>
 
-                               <td><input type="checkbox" name="files[]" value="dokumen 1.pdf" /></td>
-
-                               <td>Dokumen 1</td>
-
-                          </tr>
-
-                          <tr>
-
-                               <td><input type="checkbox" name="files[]" value="dokumen 2.pdf" /></td>
-
-                               <td>Dokumen 2</td>
-
-                          </tr>
-
-                          <tr>
-
-                               <td><input type="checkbox" name="files[]" value="dokumen 3.pdf" /></td>
-
-                               <td>Dokumen 3</td>
-
-                          </tr>
-
-                          <tr>
-
-                               <td><input type="checkbox" name="files[]" value="dokumen 4.pdf" /></td>
-
-                               <td>Dokumen 4</td>
-
-                          </tr>
-
-                          <tr>
-
-                               <td colspan="2"><input type="submit" name="submit" value="Download ZIP" />&nbsp;
+                               <td colspan="2"><input type="submit" name="submit" value="Unduh ZIP" />&nbsp;
 
                                <input type="reset" name="reset" value="Reset" /></td>
 
@@ -143,3 +61,56 @@
       </body>
 
  </html>
+
+ <?php
+ $error = "";
+ $post = $_POST;
+ if (isset($post['submit'])){
+   $file_folder = "dokumen/";
+   if(extension_loaded('zip')) {   //memeriksa ekstensi zip
+        if(isset($post['files']) and count($post['files']) > 0) {   //memeriksa file yang dipilih
+
+                   $zip = new ZipArchive(); // Load zip library
+
+                   $zip_name = time().".zip";  // nama Zip
+
+                   if($zip->open($zip_name, ZIPARCHIVE::CREATE)!==TRUE) {   //Membuka file zip untuk memuat file
+
+                        $error .= "* Maaf Download ZIP gagal";
+
+                   }
+                   foreach($post['files'] as $file){
+
+                                    $zip->addFile($file_folder.$file); // Menambahkan files ke zip
+
+                               }
+
+                               $zip->close();
+
+                               if(file_exists($zip_name))  {  // Unduh Zip
+
+                                    header('Content-type: application/zip');
+
+                                    header('Content-Disposition: attachment; filename="'.$zip_name.'"');
+
+                                    readfile($zip_name);
+
+                                    unlink($zip_name);
+
+                               }
+
+                          }else {
+
+                               $error .= "* Tidak ada file yang di pilih";
+
+                          }
+
+                     } else {
+
+                          $error .= "* Zip ekstensi tidak ada";
+
+                     }
+
+                }
+
+  ?>
