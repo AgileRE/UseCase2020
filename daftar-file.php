@@ -1,5 +1,6 @@
 <?php
 
+
  $error = "";
 
  if(isset($_POST['submit']))  {
