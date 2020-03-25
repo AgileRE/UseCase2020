@@ -49,8 +49,8 @@
                                 <td>
                                   <!--  <a href="ubah-component.php" class="btn btn-sm btn-warning">Ubah</a> -->
                                   <div class="btn-group">
-                                    <button type="button" class="btn btn-success btn-warning">Jenis</button>
-                                    <button type="button" class="btn btn-success btn-warning dropdown-toggle px-1" data-toggle="dropdown"
+                                    <button type="button" class="btn btn-success btn-success">Jenis</button>
+                                    <button type="button" class="btn btn-success btn-success dropdown-toggle px-1" data-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="false">
                                     <span class="sr-only">Toggle Dropdown</span>
                                   </button>
@@ -59,7 +59,7 @@
                                     <a class="dropdown-item" href="#">Tabel</a>
                                   </div>
                                 </div>
-                                    <a href="#" class="btn btn-sm btn-info">Submit</a>
+                                    <a href="#" class="btn btn-info">Submit</a>
                                 </td>
                             </tr>
                         <?php endfor ?>
