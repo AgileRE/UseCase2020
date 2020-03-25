@@ -1,13 +1,12 @@
 <?php
 
-
  $error = "";
 
  if(isset($_POST['submit']))  {
 
       $post = $_POST;
 
-      $file_folder = "files/"; // folder untuk load file
+      $file_folder = "dokumen/"; // folder untuk load file
 
       if(extension_loaded('zip')) {   //memeriksa ekstensi zip
 
@@ -57,12 +56,13 @@
 
  }
 
- ?> 
+ ?>
+
 <html>
 
       <head>
 
-           <title>Cara Membuat File Zip Download Dengan PHP</title>
+           <title>Download Dokumen</title>
 
            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
 
@@ -78,7 +78,7 @@
 
                 <br />
 
-                <h1>Files</h1>
+                <h1>Download Dokumen</h1>
 
                 <form name="zips" method="post">
 
@@ -90,39 +90,39 @@
 
                                <th>*</th>
 
-                               <th>Gambar</th>
+                               <th>Dokumen</th>
 
                           </tr>
 
                           <tr>
 
-                               <td><input type="checkbox" name="files[]" value="image1.jpg" /></td>
+                               <td><input type="checkbox" name="files[]" value="dokumen 1.pdf" /></td>
 
-                               <td>Gambar 1</td>
-
-                          </tr>
-
-                          <tr>
-
-                               <td><input type="checkbox" name="files[]" value="image2.jpg" /></td>
-
-                               <td>Gambar 2</td>
+                               <td>Dokumen 1</td>
 
                           </tr>
 
                           <tr>
 
-                               <td><input type="checkbox" name="files[]" value="image3.jpg" /></td>
+                               <td><input type="checkbox" name="files[]" value="dokumen 2.pdf" /></td>
 
-                               <td>Gambar 3</td>
+                               <td>Dokumen 2</td>
 
                           </tr>
 
                           <tr>
 
-                               <td><input type="checkbox" name="files[]" value="image4.jpg" /></td>
+                               <td><input type="checkbox" name="files[]" value="dokumen 3.pdf" /></td>
 
-                               <td>Gambar 4</td>
+                               <td>Dokumen 3</td>
+
+                          </tr>
+
+                          <tr>
+
+                               <td><input type="checkbox" name="files[]" value="dokumen 4.pdf" /></td>
+
+                               <td>Dokumen 4</td>
 
                           </tr>
 
