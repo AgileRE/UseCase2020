@@ -47,7 +47,18 @@
                                 <td class="sorting_1"><?= $i ?></td>
                                 <td>Skenario <?= $i ?></td>
                                 <td>
-                                    <a href="ubah-component.php" class="btn btn-sm btn-warning">Ubah</a>
+                                  <!--  <a href="ubah-component.php" class="btn btn-sm btn-warning">Ubah</a> -->
+                                  <div class="btn-group">
+                                    <button type="button" class="btn btn-success btn-sm">Ubah</button>
+                                    <button type="button" class="btn btn-success btn-sm dropdown-toggle px-1" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                  </button>
+                                  <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="#">Form</a>
+                                    <a class="dropdown-item" href="#">Tabel</a>
+                                  </div>
+                                </div>
                                     <a href="hapus-fitur.php" class="btn btn-sm btn-danger">Hapus</a>
                                 </td>
                             </tr>
