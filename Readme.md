@@ -9,3 +9,5 @@ Berdasarkan penjelasan sebelumnya, cara untuk menggunakan use case adalah sebaga
 <p>3. Dan sistem akan menambahkan seluruh informasi yang didapat kedalam database
 <p>4. Setelah data berhasil masuk ke database, sistem meng-generate informasi tersebut menjadi HTML. User juga dapat melihat preview hasil generate template UI dalam bentuk html
 <p>5. User dapat mengunduh hasil generate dalam bentuk ZIP.
+<p>Petujuk tambahan dari Use Case, adalah:
+<p>1.Multi User, merupakan fitur tambahan yang dapat upload dari metadata power designer
