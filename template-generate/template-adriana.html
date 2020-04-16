@@ -1,0 +1,523 @@
+
+ 
+<!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+  <title>Dashboard | Sistem Akademik Unair</title>
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="../plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+
+
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
+      </li>
+      <!-- <li class="nav-item d-none d-sm-inline-block">
+        <a href="index3.html" class="nav-link">Home</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="#" class="nav-link">Contact</a>
+      </li> -->
+    </ul>
+
+    <!-- SEARCH FORM -->
+    <!-- <form class="form-inline ml-3">
+      <div class="input-group input-group-sm">
+        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+        <div class="input-group-append">
+          <button class="btn btn-navbar" type="submit">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+      </div>
+    </form> -->
+
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+            
+      <li class="nav-item">
+        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#"><i
+            class="fas fa-th-large"></i></a>
+      </li>
+    </ul>
+  </nav>
+  <!-- /.navbar -->
+  <!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="index3.html" class="brand-link">
+      <img src="../dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+           style="opacity: .8">
+      <span class="brand-text font-weight-light">Sistem Akademik Unair</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block">Aktor 1</a>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->          
+          <li class="nav-item">
+            <a href="index.php" class="nav-link active">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Fitur 1 Sistem
+                <!-- <span class="right badge badge-danger">New</span> -->
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="generate-sistem.php" class="nav-link ">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Fitur 2 Sistem
+                <!-- <span class="right badge badge-danger">New</span> -->
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="hasil-generate.php" class="nav-link ">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Fitur 3  Sistem
+                <!-- <span class="right badge badge-danger">New</span> -->
+              </p>
+            </a>
+          </li>
+		  
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark">Fitur 1 Sistem</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Fitur 1 Sistem</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+
+<!-- Main content -->
+
+<div class="content">
+    <div class="container-fluid">
+	
+	<!-- <div class="row">
+		<div class="col-md-3 col-vlg-3 col-sm-6">
+			<div class="tiles green m-b-10">
+              <div class="tiles-body">
+			  <div class="controller"> <a href="javascript:;" class="reload"></a> <a href="javascript:;" class="remove"></a> </div>
+                <div class="tiles-title text-black">Overall Visitors </div>
+			         <div class="widget-stats">
+                      <div class="wrapper transparent">
+                     <!--  <br />
+<b>Notice</b>:  Undefined variable: con in <b>E:\Software\xampp\htdocs\UseCase2020-2769d4eff63c84fa43dd6c620a8a68f58e7185db\container\kelola-data-sistem.php</b> on line <b>31</b><br />
+<br />
+<b>Warning</b>:  mysqli_query() expects parameter 1 to be mysqli, null given in <b>E:\Software\xampp\htdocs\UseCase2020-2769d4eff63c84fa43dd6c620a8a68f58e7185db\container\kelola-data-sistem.php</b> on line <b>31</b><br />
+<br />
+<b>Warning</b>:  mysqli_num_rows() expects parameter 1 to be mysqli_result, null given in <b>E:\Software\xampp\htdocs\UseCase2020-2769d4eff63c84fa43dd6c620a8a68f58e7185db\container\kelola-data-sistem.php</b> on line <b>32</b><br />
+-->
+						<!--<span class="item-title">Overall Visitors</span> <span class="item-count animate-number semi-bold" <!-- data-value="" --> <!--data-animation-duration="700">0</span> 
+					  <!--</div>
+                    </div> 
+					<div class="widget-stats ">
+                      <div class="wrapper last">
+                        <!-- <br />
+<b>Notice</b>:  Undefined variable: con in <b>E:\Software\xampp\htdocs\UseCase2020-2769d4eff63c84fa43dd6c620a8a68f58e7185db\container\kelola-data-sistem.php</b> on line <b>42</b><br />
+<br />
+<b>Warning</b>:  mysqli_query() expects parameter 1 to be mysqli, null given in <b>E:\Software\xampp\htdocs\UseCase2020-2769d4eff63c84fa43dd6c620a8a68f58e7185db\container\kelola-data-sistem.php</b> on line <b>42</b><br />
+<br />
+<b>Warning</b>:  mysqli_num_rows() expects parameter 1 to be mysqli_result, null given in <b>E:\Software\xampp\htdocs\UseCase2020-2769d4eff63c84fa43dd6c620a8a68f58e7185db\container\kelola-data-sistem.php</b> on line <b>43</b><br />
+ -->
+
+
+
+						<!--<span class="item-title">Today</span> <span class="item-count animate-number semi-bold" <!--data-value="" --> <!--data-animation-duration="700">0</span> 					 <!--</div>
+                    </div> -->
+					
+	
+	<!-- //PHP nya kuhilangin tanda ? -->
+
+     <div class="row">
+        <!--<div class="col-12"> -->
+		<div class="col-md-3 col-vlg-3 col-sm-6">
+            <dic class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Skenario 1</h3>
+                </div>
+
+               <div class="card-body">
+                    <form action="">
+                        <div class="form-group row">
+                            <label for="inputPassword" class="col-sm-10 col-form-label">Ini adalah skenario 1 dari Fitur 1</label>
+                            <!--<div class="col-sm-10">
+                                <input placeholder="Masukkan nama sistem..." type="text" class="form-control" id="inputPassword">
+                            </div>-->
+                        </div>
+
+                        <div class="row">
+                            <button class="btn btn-success btn-block" type="submit">Detail</button>
+                        </div>
+                    </form>
+                </div>
+            </dic> 
+        </div>
+		
+		<div class="col-md-3 col-vlg-3 col-sm-6">
+            <dic class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Skenario 2</h3>
+                </div>
+
+               <div class="card-body">
+                    <form action="">
+                        <div class="form-group row">
+                            <label for="inputPassword" class="col-sm-10 col-form-label">Ini adalah skenario 2 dari Fitur 1</label>
+                            <!--<div class="col-sm-10">
+                                <input placeholder="Masukkan nama sistem..." type="text" class="form-control" id="inputPassword">
+                            </div>-->
+                        </div>
+
+                        <div class="row">
+                            <button class="btn btn-success btn-block" type="submit">Detail</button>
+                        </div>
+                    </form>
+                </div>
+            </dic> 
+        </div>
+		<div class="col-md-3 col-vlg-3 col-sm-6">
+            <dic class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Skenario 3</h3>
+                </div>
+
+               <div class="card-body">
+                    <form action="">
+                        <div class="form-group row">
+                            <label for="inputPassword" class="col-sm-10 col-form-label">Ini adalah skenario 3 dari Fitur 1</label>
+                            <!--<div class="col-sm-10">
+                                <input placeholder="Masukkan nama sistem..." type="text" class="form-control" id="inputPassword">
+                            </div>-->
+                        </div>
+
+                        <div class="row">
+                            <button class="btn btn-success btn-block" type="submit">Detail</button>
+                        </div>
+                    </form>
+                </div>
+            </dic> 
+        </div>
+    </div>
+        <!--<div class="row">-->
+        <div class="col-12">
+    
+    
+            <!--<div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Tabel Data Sistem</h3>
+                </div>-->
+                <!-- /.card-header -->
+                <!--<div class="card-body">
+                    <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">   
+                                                
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table id="example1" class="text-center table table-bordered table-striped dataTable" role="grid"
+                                    aria-describedby="example1_info">
+                                    <thead>
+                                        <tr role="row">
+                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1"
+                                                colspan="1" aria-sort="ascending"
+                                                aria-label="Rendering engine: activate to sort column descending"
+                                                style="width: 5px;">No</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+                                                colspan="1" aria-label="Browser: activate to sort column ascending"
+                                                style="width: 219px;">Nama Sistem</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+                                                colspan="1" aria-label="Platform(s): activate to sort column ascending"
+                                                style="width: 194px;">Aksi</th>                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                                                            <tr role="row" class="odd">
+                                            <td class="sorting_1">1</td>
+                                            <td>Sistem Akademik Unair</td>
+                                            <td>
+                                                <a href="ubah-sistem.php" class="btn btn-sm btn-warning">Ubah</a>
+                                                <a href="detail-sistem.php" class="btn btn-sm btn-info">Data Aktor</a>
+                                                <a href="hapus-sistem.php" class="btn btn-sm btn-danger">Hapus</a>
+                                            </td>                                           
+                                        </tr>            
+                                                                            <tr role="row" class="even">
+                                            <td class="sorting_1">2</td>
+                                            <td>Sistem Akademik Unair</td>
+                                            <td>
+                                                <a href="ubah-sistem.php" class="btn btn-sm btn-warning">Ubah</a>
+                                                <a href="detail-sistem.php" class="btn btn-sm btn-info">Data Aktor</a>
+                                                <a href="hapus-sistem.php" class="btn btn-sm btn-danger">Hapus</a>
+                                            </td>                                           
+                                        </tr>            
+                                                                            <tr role="row" class="odd">
+                                            <td class="sorting_1">3</td>
+                                            <td>Sistem Akademik Unair</td>
+                                            <td>
+                                                <a href="ubah-sistem.php" class="btn btn-sm btn-warning">Ubah</a>
+                                                <a href="detail-sistem.php" class="btn btn-sm btn-info">Data Aktor</a>
+                                                <a href="hapus-sistem.php" class="btn btn-sm btn-danger">Hapus</a>
+                                            </td>                                           
+                                        </tr>            
+                                                                            <tr role="row" class="even">
+                                            <td class="sorting_1">4</td>
+                                            <td>Sistem Akademik Unair</td>
+                                            <td>
+                                                <a href="ubah-sistem.php" class="btn btn-sm btn-warning">Ubah</a>
+                                                <a href="detail-sistem.php" class="btn btn-sm btn-info">Data Aktor</a>
+                                                <a href="hapus-sistem.php" class="btn btn-sm btn-danger">Hapus</a>
+                                            </td>                                           
+                                        </tr>            
+                                                                            <tr role="row" class="odd">
+                                            <td class="sorting_1">5</td>
+                                            <td>Sistem Akademik Unair</td>
+                                            <td>
+                                                <a href="ubah-sistem.php" class="btn btn-sm btn-warning">Ubah</a>
+                                                <a href="detail-sistem.php" class="btn btn-sm btn-info">Data Aktor</a>
+                                                <a href="hapus-sistem.php" class="btn btn-sm btn-danger">Hapus</a>
+                                            </td>                                           
+                                        </tr>            
+                                                                            <tr role="row" class="even">
+                                            <td class="sorting_1">6</td>
+                                            <td>Sistem Akademik Unair</td>
+                                            <td>
+                                                <a href="ubah-sistem.php" class="btn btn-sm btn-warning">Ubah</a>
+                                                <a href="detail-sistem.php" class="btn btn-sm btn-info">Data Aktor</a>
+                                                <a href="hapus-sistem.php" class="btn btn-sm btn-danger">Hapus</a>
+                                            </td>                                           
+                                        </tr>            
+                                                                            <tr role="row" class="odd">
+                                            <td class="sorting_1">7</td>
+                                            <td>Sistem Akademik Unair</td>
+                                            <td>
+                                                <a href="ubah-sistem.php" class="btn btn-sm btn-warning">Ubah</a>
+                                                <a href="detail-sistem.php" class="btn btn-sm btn-info">Data Aktor</a>
+                                                <a href="hapus-sistem.php" class="btn btn-sm btn-danger">Hapus</a>
+                                            </td>                                           
+                                        </tr>            
+                                                                            <tr role="row" class="even">
+                                            <td class="sorting_1">8</td>
+                                            <td>Sistem Akademik Unair</td>
+                                            <td>
+                                                <a href="ubah-sistem.php" class="btn btn-sm btn-warning">Ubah</a>
+                                                <a href="detail-sistem.php" class="btn btn-sm btn-info">Data Aktor</a>
+                                                <a href="hapus-sistem.php" class="btn btn-sm btn-danger">Hapus</a>
+                                            </td>                                           
+                                        </tr>            
+                                                                            <tr role="row" class="odd">
+                                            <td class="sorting_1">9</td>
+                                            <td>Sistem Akademik Unair</td>
+                                            <td>
+                                                <a href="ubah-sistem.php" class="btn btn-sm btn-warning">Ubah</a>
+                                                <a href="detail-sistem.php" class="btn btn-sm btn-info">Data Aktor</a>
+                                                <a href="hapus-sistem.php" class="btn btn-sm btn-danger">Hapus</a>
+                                            </td>                                           
+                                        </tr>            
+                                                                            <tr role="row" class="even">
+                                            <td class="sorting_1">10</td>
+                                            <td>Sistem Akademik Unair</td>
+                                            <td>
+                                                <a href="ubah-sistem.php" class="btn btn-sm btn-warning">Ubah</a>
+                                                <a href="detail-sistem.php" class="btn btn-sm btn-info">Data Aktor</a>
+                                                <a href="hapus-sistem.php" class="btn btn-sm btn-danger">Hapus</a>
+                                            </td>                                           
+                                        </tr>            
+                                                                            <tr role="row" class="odd">
+                                            <td class="sorting_1">11</td>
+                                            <td>Sistem Akademik Unair</td>
+                                            <td>
+                                                <a href="ubah-sistem.php" class="btn btn-sm btn-warning">Ubah</a>
+                                                <a href="detail-sistem.php" class="btn btn-sm btn-info">Data Aktor</a>
+                                                <a href="hapus-sistem.php" class="btn btn-sm btn-danger">Hapus</a>
+                                            </td>                                           
+                                        </tr>            
+                                                                            <tr role="row" class="even">
+                                            <td class="sorting_1">12</td>
+                                            <td>Sistem Akademik Unair</td>
+                                            <td>
+                                                <a href="ubah-sistem.php" class="btn btn-sm btn-warning">Ubah</a>
+                                                <a href="detail-sistem.php" class="btn btn-sm btn-info">Data Aktor</a>
+                                                <a href="hapus-sistem.php" class="btn btn-sm btn-danger">Hapus</a>
+                                            </td>                                           
+                                        </tr>            
+                                                                            <tr role="row" class="odd">
+                                            <td class="sorting_1">13</td>
+                                            <td>Sistem Akademik Unair</td>
+                                            <td>
+                                                <a href="ubah-sistem.php" class="btn btn-sm btn-warning">Ubah</a>
+                                                <a href="detail-sistem.php" class="btn btn-sm btn-info">Data Aktor</a>
+                                                <a href="hapus-sistem.php" class="btn btn-sm btn-danger">Hapus</a>
+                                            </td>                                           
+                                        </tr>            
+                                                                            <tr role="row" class="even">
+                                            <td class="sorting_1">14</td>
+                                            <td>Sistem Akademik Unair</td>
+                                            <td>
+                                                <a href="ubah-sistem.php" class="btn btn-sm btn-warning">Ubah</a>
+                                                <a href="detail-sistem.php" class="btn btn-sm btn-info">Data Aktor</a>
+                                                <a href="hapus-sistem.php" class="btn btn-sm btn-danger">Hapus</a>
+                                            </td>                                           
+                                        </tr>            
+                                                                            <tr role="row" class="odd">
+                                            <td class="sorting_1">15</td>
+                                            <td>Sistem Akademik Unair</td>
+                                            <td>
+                                                <a href="ubah-sistem.php" class="btn btn-sm btn-warning">Ubah</a>
+                                                <a href="detail-sistem.php" class="btn btn-sm btn-info">Data Aktor</a>
+                                                <a href="hapus-sistem.php" class="btn btn-sm btn-danger">Hapus</a>
+                                            </td>                                           
+                                        </tr>            
+                                                                            <tr role="row" class="even">
+                                            <td class="sorting_1">16</td>
+                                            <td>Sistem Akademik Unair</td>
+                                            <td>
+                                                <a href="ubah-sistem.php" class="btn btn-sm btn-warning">Ubah</a>
+                                                <a href="detail-sistem.php" class="btn btn-sm btn-info">Data Aktor</a>
+                                                <a href="hapus-sistem.php" class="btn btn-sm btn-danger">Hapus</a>
+                                            </td>                                           
+                                        </tr>            
+                                                                            <tr role="row" class="odd">
+                                            <td class="sorting_1">17</td>
+                                            <td>Sistem Akademik Unair</td>
+                                            <td>
+                                                <a href="ubah-sistem.php" class="btn btn-sm btn-warning">Ubah</a>
+                                                <a href="detail-sistem.php" class="btn btn-sm btn-info">Data Aktor</a>
+                                                <a href="hapus-sistem.php" class="btn btn-sm btn-danger">Hapus</a>
+                                            </td>                                           
+                                        </tr>            
+                                                                            <tr role="row" class="even">
+                                            <td class="sorting_1">18</td>
+                                            <td>Sistem Akademik Unair</td>
+                                            <td>
+                                                <a href="ubah-sistem.php" class="btn btn-sm btn-warning">Ubah</a>
+                                                <a href="detail-sistem.php" class="btn btn-sm btn-info">Data Aktor</a>
+                                                <a href="hapus-sistem.php" class="btn btn-sm btn-danger">Hapus</a>
+                                            </td>                                           
+                                        </tr>            
+                                                                
+                                    </tbody>
+                                    <tfoot>
+                                        
+                                        <tr>
+                                            <th rowspan="1" colspan="1">No</th>
+                                            <th rowspan="1" colspan="1">Nama Sistem</th>
+                                            <th rowspan="1" colspan="1">Aksi</th>
+                                        </tr>                                                                                    
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                </div>
+                <!-- /.card-body -->
+            </div>
+
+        </div>
+        <!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content -->  </div>
+  <!-- /.content-wrapper -->
+
+  
+
+  <!-- Main Footer -->
+<footer class="main-footer">
+    <!-- To the right -->
+    <!-- <div class="float-right d-none d-sm-inline">
+      Anything you want
+    </div> -->
+    <!-- Default to the left -->
+    <!-- <strong>Copyright &copy; 2014-2019 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved. -->
+  </footer>
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->
+
+
+<!-- jQuery -->
+<script src="../plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- DataTables -->
+<script src="../plugins/datatables/jquery.dataTables.js"></script>
+<script src="../plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+<!-- AdminLTE App -->
+<script src="../dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../dist/js/demo.js"></script>
+<!-- page script -->
+<script>
+  $(function () {
+    $("#example1").DataTable();
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+    });
+  });
+</script>
+
+</body>
+</html>

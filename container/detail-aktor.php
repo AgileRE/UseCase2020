@@ -46,16 +46,16 @@
     </div>
         <div class="row">
         <div class="col-12">
-    
-    
+
+
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Tabel Data Fitur</h3>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">   
-                                                
+                    <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
+
 
                         <div class="row">
                             <div class="col-sm-12">
@@ -72,7 +72,7 @@
                                                 style="width: 219px;">Nama Fitur</th>
                                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
                                                 colspan="1" aria-label="Platform(s): activate to sort column ascending"
-                                                style="width: 194px;">Aksi</th>                                            
+                                                style="width: 194px;">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -83,23 +83,24 @@
                                             <td>
                                                 <a href="ubah-fitur.php" class="btn btn-sm btn-warning">Ubah</a>
                                                 <a href="detail-fitur.php" class="btn btn-sm btn-info">Data Use Case Scenario</a>
+                                                <a href="component-view.php" class="btn btn-sm btn-secondary">Data Component View</a>
                                                 <a href="hapus-fitur.php" class="btn btn-sm btn-danger">Hapus</a>
-                                            </td>                                           
-                                        </tr>            
-                                    <?php endfor ?>                            
+                                            </td>
+                                        </tr>
+                                    <?php endfor ?>
                                     </tbody>
                                     <tfoot>
-                                        
+
                                         <tr>
                                             <th rowspan="1" colspan="1">No</th>
                                             <th rowspan="1" colspan="1">Nama Fitur</th>
                                             <th rowspan="1" colspan="1">Aksi</th>
-                                        </tr>                                                                                    
+                                        </tr>
                                     </tfoot>
                                 </table>
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
                 </div>
