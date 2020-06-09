@@ -50,7 +50,18 @@ function tambahScenario($data, $id_fitur){
     $scenarioNormal = htmlspecialchars($data["scenario-normal"]);  
     $scenarioAlternatif = htmlspecialchars($data["scenario-alternatif"]);  
     $scenarioException = htmlspecialchars($data["scenario-exception"]);  
-    var_dump(explode(PHP_EOL,trim($scenarioAlternatif)));die;
+    
+    $arraySN = explode(PHP_EOL,trim($scenarioNormal));
+    $arraySA = explode(PHP_EOL,trim($scenarioAlternatif));
+    $arraySE = explode(PHP_EOL,trim($scenarioException));
+
+
+    
+
+    foreach ($arraySN as $key => $value) {
+      
+    }
+    
   
     $query = "UPDATE `fitur` SET deskripsi = '$deskripsiFitur', kondisi_awal = '$kondisiAwal', kondisi_akhir = '$kondisiAkhir', scenario_normal = '$scenarioNormal', scenario_alternatif = '$scenarioAlternatif', scenario_exception = '$scenarioException' WHERE id_fitur = '$id_fitur'";
 
