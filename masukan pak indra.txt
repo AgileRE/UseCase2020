@@ -22,3 +22,13 @@ Laporan + kebutuhan tim:
 Usul :
 1. Anggota kelompok memasukkan data (seolah-olah beneran) / Test Quality
 2. 
+
+
+________________________________
+1 fitur = 1 @halaman_view
+
+Kenapa? karena apabila 1 fitur bbrp view, bingung menentukan component_view yang ______ ikut view yang mana di usecase scenario
+
+1. Membuka tampilan @halaman_login_admin
+2. Mengisikan #form_username dan #form_password
+3. Menekan #tombol_login                

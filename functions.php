@@ -44,24 +44,48 @@ function listSistem(){
 function tambahScenario($data, $id_fitur){
     global $conn;
 
-    $deskripsiFitur = htmlspecialchars($data["deskripsi-fitur"]);  
-    $kondisiAwal = htmlspecialchars($data["kondisi-awal"]);  
-    $kondisiAkhir = htmlspecialchars($data["kondisi-akhir"]);  
-    $scenarioNormal = htmlspecialchars($data["scenario-normal"]);  
-    $scenarioAlternatif = htmlspecialchars($data["scenario-alternatif"]);  
-    $scenarioException = htmlspecialchars($data["scenario-exception"]);  
+    $deskripsiFitur = htmlspecialchars(trim($data["deskripsi-fitur"]));  
+    $kondisiAwal = htmlspecialchars(trim($data["kondisi-awal"]));  
+    $kondisiAkhir = htmlspecialchars(trim($data["kondisi-akhir"]));  
+    $scenarioNormal = htmlspecialchars(trim($data["scenario-normal"]));  
+    $scenarioAlternatif = htmlspecialchars(trim($data["scenario-alternatif"]));  
+    $scenarioException = htmlspecialchars(trim($data["scenario-exception"]));  
     
     $arraySN = explode(PHP_EOL,trim($scenarioNormal));
     $arraySA = explode(PHP_EOL,trim($scenarioAlternatif));
     $arraySE = explode(PHP_EOL,trim($scenarioException));
 
-
-    
+    //tiap baris di textarea scenarionormal divek apakah punya @halaman_view
+    foreach ($arraySN as $key => $value) {
+      if (strpos($value, '@') !== false) {
+        //masukkan @halaman_view ke tabel 'view'
+        echo "Masukkan ke tabel view";      
+        echo "<br>";
+      }       
+    }
 
     foreach ($arraySN as $key => $value) {
-      
+      if (strpos($value, '#') !== false) {
+        //ambil id @view yang barusan dimasukkan
+        //masukkan id view dan nama_component ke tabel component_view    
+      }       
     }
-    
+
+    // ----> minta masukkan title untuk view tsb
+    // for setiap component_view pada view tsb (select pake id view), isi jenis_component di tabel component_view
+    //kalau milih :
+    // - tabel pilih berapa kolom, dan tiap kolom namanya apa aja
+    // - form typenya apa (text file dsb)
+    // - tombol tulisannya apa
+
+    //kalau datanya belum ada tinggal tambah
+    // kalau daranya sudah ada di tambah lagi aja gapapa
+    //jadi dicek dulu apakah sudah ada view dengan id_fitur yang sedang ingin ditambahkan
+    //ingat 1 fitur, cuma ada 1 view
+
+
+    //di component view dashboard bisa hapus dan ubah jenis component
+    // die;
   
     $query = "UPDATE `fitur` SET deskripsi = '$deskripsiFitur', kondisi_awal = '$kondisiAwal', kondisi_akhir = '$kondisiAkhir', scenario_normal = '$scenarioNormal', scenario_alternatif = '$scenarioAlternatif', scenario_exception = '$scenarioException' WHERE id_fitur = '$id_fitur'";
 
