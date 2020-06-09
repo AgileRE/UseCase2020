@@ -1,13 +1,45 @@
+<?php
+include('functions.php');
+
+$id_fitur = $_GET['id'];
+$fitur = detailFitur($id_fitur);
+
+$sql = "SELECT * FROM `fitur` WHERE id_fitur = '$id_fitur'";
+$nama_fitur = query($sql);
+
+
+if (isset($_POST["submit"])){
+  // var_dump(explode(PHP_EOL,$_POST['scenario-normal']));die;
+    if (tambahScenario($_POST, $id_fitur) > 0){
+        echo "
+        <script>
+            alert('Scenario berhasil disimpan!');
+            document.location.href = 'component-view.php?id=$id_fitur'
+        </script>
+        ";
+    } else {
+        echo "
+        <script>
+        alert('Scenario gagal disimpan!');
+        document.location.href = 'detail-fitur.php?id=$id_fitur'
+        </script>";
+    }
+
+}
+?>
+
+
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Detail Fitur : Fitur 1</h1>
+                <h1 class="m-0 text-dark">Detail Fitur : <?= $nama_fitur[0]['nama_fitur']?></h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Detail Fitur : Fitur 1</li>
+                    <li class="breadcrumb-item"><a href="index.php">Kelola Data Sistem</a></li>
+                    <li class="breadcrumb-item active">Detail Fitur :  <?= $nama_fitur[0]['nama_fitur']?></li>
                 </ol>
             </div><!-- /.col -->
         </div><!-- /.row -->
@@ -29,46 +61,81 @@
             </div>
             <div class="card-body">
             <div class="form-group">
+            <form action="" method="post">
                 <label for="inputName">Nama Aktor</label>
-                <input type="text" id="inputName" class="form-control" value="Aktor 1" disabled>
+                <input type="text" id="inputName" class="form-control" value="<?= $fitur[0]['nama_aktor']?>" disabled>
               </div>
               <div class="form-group">
                 <label for="inputName">Nama Fitur</label>
-                <input type="text" id="inputName" class="form-control" value="Fitur 1" disabled>
+                <input type="text" id="inputName" class="form-control" value="<?= $fitur[0]['nama_fitur']?>" disabled>
               </div>
               <div class="form-group">
-                <label for="inputName">Kondisi Awal</label>
-                <input type="text" id="inputName" class="form-control">
+                <label for="deskripsi-fitur">Deskripsi Fitur</label>
+                <input
+                <?php if($fitur[0]['deskripsi'] != ''):?>
+                  value='<?= $fitur[0]['deskripsi'] ?>'
+                <?php endif ?>
+                
+                 name="deskripsi-fitur" type="text" id="deskripsi-fitur" class="form-control">
               </div>
               <div class="form-group">
-                <label for="inputName">Kondisi Akhir</label>
-                <input type="text" id="inputName" class="form-control">
+                <label for="kondisi-awal">Kondisi Awal</label>
+                <input
+                <?php if($fitur[0]['kondisi_awal'] != ''):?>
+                  value='<?= $fitur[0]['kondisi_awal'] ?>'
+                <?php endif ?>
+                
+                
+                 name="kondisi-awal" type="text" id="kondisi-awal" class="form-control">
               </div>
               <div class="form-group">
-                <label for="inputDescription">Scenario Normal</label>
-<textarea id="inputDescription" class="form-control" rows="4"
+                <label for="kondisi-akhir">Kondisi Akhir</label>
+                <input
+                <?php if($fitur[0]['kondisi_akhir'] != ''):?>
+                  value='<?= $fitur[0]['kondisi_akhir'] ?>'
+                <?php endif ?>
+                
+                
+                 name="kondisi-akhir" type="text" id="kondisi-akhir" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="scenario-normal">Scenario Normal</label>
+<textarea id="scenario-normal" name="scenario-normal" class="form-control" rows="4"
 placeholder="1. ________
 2. ________
-3. ________"></textarea>
+3. ________">
+<?php if($fitur[0]['scenario_normal'] != ''):?>
+<?= $fitur[0]['scenario_normal'] ?>
+                <?php endif ?>
+
+</textarea>
               </div>
               <div class="form-group">
-                <label for="inputDescription">Scenario Alternatif</label>
-                <textarea id="inputDescription" class="form-control" rows="4"
+                <label for="scenario-alternatif">Scenario Alternatif</label>
+                <textarea id="scenario-alternatif"  name="scenario-alternatif" class="form-control" rows="4"
 placeholder="1. ________
 2. ________
-3. ________"></textarea>
+3. ________">
+<?php if($fitur[0]['scenario_exception'] != ''):?>
+<?= $fitur[0]['scenario_exception'] ?>
+                <?php endif ?>
+                </textarea>
               </div>
               <div class="form-group">
-                <label for="inputDescription">Scenario Exception</label>
-                <textarea id="inputDescription" class="form-control" rows="4"
+                <label for="scenario-exception">Scenario Exception</label>
+                <textarea id="scenario-exception" name="scenario-exception" class="form-control" rows="4"
 placeholder="1. ________
 2. ________
-3. ________"></textarea>
+3. ________">
+<?php if($fitur[0]['scenario_alternatif'] != ''):?>
+<?= $fitur[0]['scenario_alternatif'] ?>
+                <?php endif ?>
+                </textarea>
               </div>
 
-              <a href="component-view.php" class="btn btn-success btn-block">Component View</a>
+              <button type="submit" name="submit" class="btn btn-success btn-block">Simpan dan ke Component View</button>
             </div>
-
+            </form>
 
             <!-- /.card-body -->
           </div>

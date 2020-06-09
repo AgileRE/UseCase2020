@@ -35,7 +35,10 @@
                                   style="width: 5px;">No</th>
                               <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
                                   colspan="1" aria-label="Browser: activate to sort column ascending"
-                                  style="width: 219px;">Nama Skenario</th>
+                                  style="width: 219px;">Nama Component</th>
+                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+                                  colspan="1" aria-label="Browser: activate to sort column ascending"
+                                  style="width: 219px;">Tipe</th>
                               <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
                                   colspan="1" aria-label="Platform(s): activate to sort column ascending"
                                   style="width: 194px;">Aksi</th>
@@ -45,7 +48,8 @@
                         <?php for($i=1;$i<5;$i++): ?>
                             <tr role="row" class="<?php if($i%2==0): echo "even"; else: echo "odd"; endif?>">
                                 <td class="sorting_1"><?= $i ?></td>
-                                <td>Skenario <?= $i ?></td>
+                                <td>Component <?= $i ?></td>
+                                <td>Tabel</td>
                                 <td>
                                   <!--  <a href="ubah-component.php" class="btn btn-sm btn-warning">Ubah</a> -->
                                   <div class="btn-group">
@@ -63,12 +67,33 @@
                                 </td>
                             </tr>
                         <?php endfor ?>
+                        <tr role="row" class="<?php if($i%2==0): echo "even"; else: echo "odd"; endif?>">
+                                <td class="sorting_1"><?= $i ?></td>
+                                <td>Component <?= $i ?></td>
+                                <td>Form</td>
+                                <td>
+                                  <!--  <a href="ubah-component.php" class="btn btn-sm btn-warning">Ubah</a> -->
+                                  <div class="btn-group">
+                                    <button type="button" class="btn btn-success btn-sm">Ubah</button>
+                                    <button type="button" class="btn btn-success btn-sm dropdown-toggle px-1" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                  </button>
+                                  <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="#">Form</a>
+                                    <a class="dropdown-item" href="#">Tabel</a>
+                                  </div>
+                                </div>
+                                    <a href="hapus-fitur.php" class="btn btn-sm btn-danger">Hapus</a>
+                                </td>
+                            </tr>
                         </tbody>
                         <tfoot>
 
                             <tr>
                                 <th rowspan="1" colspan="1">No</th>
-                                <th rowspan="1" colspan="1">Nama Skenario</th>
+                                <th rowspan="1" colspan="1">Nama Component</th>
+                                <th rowspan="1" colspan="1">Tipe</th>
                                 <th rowspan="1" colspan="1">Aksi</th>
                             </tr>
                         </tfoot>

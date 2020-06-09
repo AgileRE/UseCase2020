@@ -1,7 +1,10 @@
  
 <?php 
 $page = 1;
-include('component/header.php') ?>
+include('component/header.php');
+
+
+?>
 
 
 

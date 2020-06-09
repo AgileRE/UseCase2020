@@ -1,3 +1,30 @@
+<?php
+
+include('functions.php');
+
+$sistem = listSistem();
+
+// cek apakah tombol submit sudah ditekan atau belum
+if (isset($_POST["submit"])){
+    if (tambahSistem($_POST) > 0){
+        echo "
+        <script>
+            alert('Sistem berhasil ditambahkan!');
+            document.location.href = 'index.php'
+        </script>
+        ";
+    } else {
+        echo "
+        <script>
+        alert('Sistem gagal ditambahkan!');
+        document.location.href = 'index.php'
+        </script>";
+    }
+
+}
+
+?>
+
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
@@ -28,16 +55,16 @@
                 </div>
 
                 <div class="card-body">
-                    <form action="">
+                    <form action="" method="POST">
                         <div class="form-group row">
-                            <label for="inputPassword" class="col-sm-2 col-form-label">Nama Sistem</label>
+                            <label for="nama=sistem" class="col-sm-2 col-form-label">Nama Sistem</label>
                             <div class="col-sm-10">
-                                <input placeholder="Masukkan nama sistem..." type="text" class="form-control" id="inputPassword">
+                                <input name="nama-sistem" placeholder="Masukkan nama sistem..." type="text" class="form-control" id="nama=sistem">
                             </div>
                         </div>
 
                         <div class="row">
-                            <button class="btn btn-success btn-block" type="submit">+ Tambah Data</button>
+                            <button class="btn btn-success btn-block" name="submit" type="submit">+ Tambah Data</button>
                         </div>
                     </form>
                 </div>
@@ -76,17 +103,17 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    <?php for($i=1;$i<19;$i++): ?>
+                                    <?php $i=0; foreach($sistem as $sis): ?>
                                         <tr role="row" class="<?php if($i%2==0): echo "even"; else: echo "odd"; endif?>">
-                                            <td class="sorting_1"><?= $i ?></td>
-                                            <td>Sistem Akademik Unair</td>
+                                            <td class="sorting_1"><?= ++$i ?></td>
+                                            <td><?= $sis['nama_sistem'] ?></td>
                                             <td>
-                                                <a href="ubah-sistem.php" class="btn btn-sm btn-warning">Ubah</a>
-                                                <a href="detail-sistem.php" class="btn btn-sm btn-info">Data Aktor</a>
-                                                <a href="hapus-sistem.php" class="btn btn-sm btn-danger">Hapus</a>
+                                                <a href="ubah-sistem.php?id=<?= $sis['id_sistem'] ?>" class="btn btn-sm btn-warning">Ubah</a>
+                                                <a href="detail-sistem.php?id=<?= $sis['id_sistem'] ?>" class="btn btn-sm btn-info">Data Aktor</a>
+                                                <a href="hapus-sistem.php?id=<?= $sis['id_sistem'] ?>" class="btn btn-sm btn-danger">Hapus</a>
                                             </td>                                           
                                         </tr>            
-                                    <?php endfor ?>                            
+                                    <?php endforeach ?>                            
                                     </tbody>
                                     <tfoot>
                                         

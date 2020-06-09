@@ -1,12 +1,42 @@
+<?php
+include('functions.php');
+
+$id_aktor = $_GET['id'];
+$fitur = listFitur($id_aktor);
+
+$sql = "SELECT * FROM `aktor` WHERE id_aktor = '$id_aktor'";
+$nama_aktor = query($sql);
+
+
+if (isset($_POST["submit"])){
+    if (tambahFitur($_POST, $id_aktor) > 0){
+        echo "
+        <script>
+            alert('Aktor berhasil ditambahkan!');
+            document.location.href = 'detail-aktor.php?id=$id_aktor'
+        </script>
+        ";
+    } else {
+        echo "
+        <script>
+        alert('Aktor gagal ditambahkan!');
+        document.location.href = 'detail-aktor.php?id=$id_aktor'
+        </script>";
+    }
+
+}
+?>
+
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Detail Aktor : Aktor 1</h1>
+                <h1 class="m-0 text-dark">Detail Aktor : <?= $nama_aktor[0]['nama_aktor']?></h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="index.php">Kelola Data Sistem</a></li>                    
                     <li class="breadcrumb-item active">Detail Aktor</li>
                 </ol>
             </div><!-- /.col -->
@@ -28,16 +58,16 @@
                 </div>
 
                 <div class="card-body">
-                    <form action="">
+                    <form action="" method="post">
                         <div class="form-group row">
-                            <label for="inputPassword" class="col-sm-2 col-form-label">Nama Fitur</label>
+                            <label for="nama-fitur" class="col-sm-2 col-form-label">Nama Fitur</label>
                             <div class="col-sm-10">
-                                <input placeholder="Masukkan nama fitur..." type="text" class="form-control" id="inputPassword">
+                                <input name="nama-fitur" placeholder="Masukkan nama fitur..." type="text" class="form-control" id="nama-fitur">
                             </div>
                         </div>
 
                         <div class="row">
-                            <button class="btn btn-success btn-block" type="submit">+ Tambah Data</button>
+                            <button class="btn btn-success btn-block" name="submit" type="submit">+ Tambah Data</button>
                         </div>
                     </form>
                 </div>
@@ -76,18 +106,18 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    <?php for($i=1;$i<5;$i++): ?>
+                                    <?php $i=0; foreach($fitur as $fit): ?>
                                         <tr role="row" class="<?php if($i%2==0): echo "even"; else: echo "odd"; endif?>">
-                                            <td class="sorting_1"><?= $i ?></td>
-                                            <td>Fitur <?= $i ?></td>
+                                            <td class="sorting_1"><?= ++$i ?></td>
+                                            <td><?= $fit['nama_fitur'] ?></td>
                                             <td>
-                                                <a href="ubah-fitur.php" class="btn btn-sm btn-warning">Ubah</a>
-                                                <a href="detail-fitur.php" class="btn btn-sm btn-info">Data Use Case Scenario</a>
-                                                <a href="component-view.php" class="btn btn-sm btn-secondary">Data Component View</a>
-                                                <a href="hapus-fitur.php" class="btn btn-sm btn-danger">Hapus</a>
+                                                <!-- <a href="ubah-fitur.php?id=<//?= $fit['id_fitur'] ?>" class="btn btn-sm btn-warning">Ubah</a> -->
+                                                <a href="detail-fitur.php?id=<?= $fit['id_fitur'] ?>" class="btn btn-sm btn-info">Data Use Case Scenario</a>
+                                                <a href="component-view.php?id=<?= $fit['id_fitur'] ?>" class="btn btn-sm btn-secondary">Data Component View</a>
+                                                <a href="hapus-fitur.php?id=<?= $fit['id_fitur'] ?>" class="btn btn-sm btn-danger">Hapus</a>
                                             </td>
                                         </tr>
-                                    <?php endfor ?>
+                                    <?php endforeach ?>
                                     </tbody>
                                     <tfoot>
 

@@ -1,0 +1,24 @@
+Programmer backend:
+1. Update database berdasarkan review pak indra - dimas
+2. Form menangkap informasi dan insert ke database - dimas
+3. Sistem dapat mengenali @view dan #form dari inputan use case scenario -etak
+4. Sistem membuat folder baru tiap generate -bagas
+5. Sistem membuat file HTML di tiap folder aktor sesuai informasi use case -bagas
+6. Menginstal library untuk compress .zip - dimgung
+7. Sistem dapat mengcompress folder hasil generate menjadi zip menggunakan library -yudhit
+8. User dapat mendownload UI hasil generate (.zip) -yudhit
+9. Sistem dapat menampilkan riwayat hasil generate
+10. Eksplorasi aplikasi bdd untuk PHP
+
+Designer UI + frontend:
+1. Membuat tampilan frontend berhasil generate UI dan download .zip (aping, arian)
+2. Membuat tampilan frontend manajemen component view (title, table, form type, dan informasi tambahan lainnya) (arya,  rana)
+3. Membuat tampilan frontend HTML "template hasil generate" adri,aini
+
+Laporan + kebutuhan tim:
+1. Memodifikasi Read me.md isinya deskripsi aplikasi, cara penggunaan, dan petunjuk2 lainnya
+
+
+Usul :
+1. Anggota kelompok memasukkan data (seolah-olah beneran) / Test Quality
+2. 
