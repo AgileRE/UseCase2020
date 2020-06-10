@@ -436,9 +436,21 @@ function upload(){
   return $namaFileBaru;
 }
 
-function hapus($id){
+function hapusSistem($id_sistem){
   global $conn;
-  mysqli_query($conn, "DELETE FROM mahasiswa WHERE id = $id");
+  mysqli_query($conn, "DELETE FROM sistem WHERE id_sistem = $id_sistem");
+  return mysqli_affected_rows($conn);
+}
+
+function hapusAktor($id_aktor){
+  global $conn;
+  mysqli_query($conn, "DELETE FROM aktor WHERE id_aktor = $id_aktor");
+  return mysqli_affected_rows($conn);
+}
+
+function hapusFitur($id_fitur){
+  global $conn;
+  mysqli_query($conn, "DELETE FROM fitur WHERE id_fitur = $id_fitur");
   return mysqli_affected_rows($conn);
 }
 
