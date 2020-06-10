@@ -19,9 +19,26 @@
     }
 
     $id_fitur = $_GET['id'];    
-    $nama_fitur = query("SELECT * FROM fitur WHERE id_fitur = $id_fitur");    
+    $nama_fitur = query("SELECT * FROM fitur WHERE id_fitur = $id_fitur");        
     $view = query("SELECT * FROM view WHERE id_fitur = $id_fitur");     
+    if(count($view) == 0){
+        $idView = '';
+        $title = '';
+    } else {
+        $idView =$view[0]['id_view'];
+        $title =$view[0]['title'];
+    }
     $component_view = query("SELECT nama_component, jenis_component FROM `component_view` INNER JOIN `view` ON component_view.id_view = view.id_view INNER JOIN `fitur` ON fitur.id_fitur = view.id_fitur WHERE fitur.id_fitur ='$id_fitur'");    
+    $id_fitur = $_GET['id'];
+    
+
+    $idAktor = $nama_fitur[0]['id_aktor'];
+    $sql = "SELECT * FROM `aktor` WHERE id_aktor = '$idAktor'";
+    $aktor = query($sql);
+
+    $idSistem = $aktor[0]['id_sistem'];
+    $sql = "SELECT * FROM `sistem` WHERE id_sistem = '$idSistem'";
+    $sistem = query($sql);
 ?>
 
 <div class="content-header">
@@ -33,6 +50,10 @@
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="index.php">Kelola Data Sistem</a></li>  
+                    <li class="breadcrumb-item"><a href="detail-aktor.php?id=<?=$idSistem?>">Data Sistem : <?= $sistem[0]['nama_sistem']?></a></li>
+                    <li class="breadcrumb-item"><a href="detail-aktor.php?id=<?=$idAktor?>">Data Aktor : <?= $aktor[0]['nama_aktor']?></a></li> 
+                    <li class="breadcrumb-item"><a href="detail-fitur.php?id=<?= $id_fitur ?>">Detail Fitur  : <?= $nama_fitur[0]['nama_fitur'] ?></a></li>  
                     <li class="breadcrumb-item active">Data View dan Component</li>
                 </ol>
             </div><!-- /.col -->
@@ -57,13 +78,18 @@
                         <div class="form-group row">
                             <label for="nama=sistem" class="col-sm-2 col-form-label">Title Halaman</label>
                             <div class="col-sm-10">
-                                <input name="id-view" value="<?=$view[0]['id_view']?>" placeholder="Masukkan title halaman..." type="text" class="form-control" id="nama=sistem" hidden>
-                                <input name="nama-title" value="<?=$view[0]['title']?>" placeholder="Masukkan title halaman..." type="text" class="form-control" id="nama=sistem">
+                                <input name="id-view" value="<?= $idView ?>" placeholder="Masukkan title halaman..." type="text" class="form-control" id="nama=sistem" hidden>
+                                <input name="nama-title" value="<?=$title?>" placeholder="Masukkan title halaman..." type="text" class="form-control" id="nama=sistem">
                             </div>
                         </div>
 
                         <div class="row">
-                            <button class="btn btn-success btn-block" name="submit" type="submit">Simpan Informasi</button>
+                            <?php if (count($view) == 0):?>
+                            <button class="btn btn-success btn-block" name="submit" disabled type="submit">Simpan Informasi</button>    
+                            <?php else: ?>
+                                <button class="btn btn-success btn-block" name="submit" type="submit">Simpan Informasi</button>
+                            <?php endif ?>
+                            
                         </div>
                     </form>
                 </div>

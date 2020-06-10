@@ -7,6 +7,9 @@ $fitur = listFitur($id_aktor);
 $sql = "SELECT * FROM `aktor` WHERE id_aktor = '$id_aktor'";
 $nama_aktor = query($sql);
 
+$idSistem = $nama_aktor[0]['id_sistem'];
+$sql = "SELECT * FROM `sistem` WHERE id_sistem = '$idSistem'";
+$sistem = query($sql);
 
 if (isset($_POST["submit"])){
     if (tambahFitur($_POST, $id_aktor) > 0){
@@ -37,7 +40,8 @@ if (isset($_POST["submit"])){
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
                     <li class="breadcrumb-item"><a href="index.php">Kelola Data Sistem</a></li>                    
-                    <li class="breadcrumb-item active">Detail Aktor</li>
+                    <li class="breadcrumb-item"><a href="detail-sistem.php?id=<?=$idSistem?>">Detail Sistem : <?= $sistem[0]['nama_sistem']?></a></li> 
+                    <li class="breadcrumb-item active">Detail Aktor: <?= $nama_aktor[0]['nama_aktor']?></li>
                 </ol>
             </div><!-- /.col -->
         </div><!-- /.row -->

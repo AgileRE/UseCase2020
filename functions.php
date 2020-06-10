@@ -44,6 +44,7 @@ function listSistem(){
 function tambahScenario($data, $id_fitur){
     global $conn;
 
+    $namaFitur = htmlspecialchars(trim($data["nama-fitur"]));  
     $deskripsiFitur = htmlspecialchars(trim($data["deskripsi-fitur"]));  
     $kondisiAwal = htmlspecialchars(trim($data["kondisi-awal"]));  
     $kondisiAkhir = htmlspecialchars(trim($data["kondisi-akhir"]));  
@@ -293,8 +294,8 @@ function tambahScenario($data, $id_fitur){
     //di component view dashboard bisa hapus dan ubah jenis component
     // die;
   
-    $query = "UPDATE `fitur` SET deskripsi = '$deskripsiFitur', kondisi_awal = '$kondisiAwal', kondisi_akhir = '$kondisiAkhir', scenario_normal = '$scenarioNormal', scenario_alternatif = '$scenarioAlternatif', scenario_exception = '$scenarioException' WHERE id_fitur = '$id_fitur'";
-
+    $query = "UPDATE `fitur` SET nama_fitur = '$namaFitur', deskripsi = '$deskripsiFitur', kondisi_awal = '$kondisiAwal', kondisi_akhir = '$kondisiAkhir', scenario_normal = '$scenarioNormal', scenario_alternatif = '$scenarioAlternatif', scenario_exception = '$scenarioException' WHERE id_fitur = '$id_fitur'";
+    // echo $query;die;
     
     
   
@@ -327,6 +328,33 @@ function tambahSistem($data){
 
   return mysqli_affected_rows($conn);
 }
+
+function ubahSistem($data){
+  global $conn;
+  $idSistem = $data["id-sistem"];
+  $namaSistem = htmlspecialchars($data["nama-sistem"]);
+
+  $query = "UPDATE sistem SET
+              nama_sistem = '$namaSistem'        
+              WHERE id_sistem = $idSistem";
+ 
+
+  return  mysqli_query($conn, $query);
+}
+
+function ubahAktor($data){
+  global $conn;
+  $idAktor = $data["id-aktor"];
+  $namaAktor = htmlspecialchars($data["nama-aktor"]);
+
+  $query = "UPDATE aktor SET
+              nama_aktor = '$namaAktor'        
+              WHERE id_aktor = $idAktor";
+ 
+
+  return  mysqli_query($conn, $query);
+}
+
 
 
 function tambahAktor($data, $id_sistem){

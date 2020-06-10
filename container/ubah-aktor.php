@@ -2,23 +2,24 @@
 
 include('functions.php');
 
-$idSistem = $_GET['id'];
-$sistem = query("SELECT * FROM `sistem` WHERE id_sistem = $idSistem");
+$idAktor = $_GET['id'];
+$aktor = query("SELECT * FROM `aktor` WHERE id_aktor = $idAktor");
+$idSistem = $aktor[0]['id_sistem'];
 
 // cek apakah tombol submit sudah ditekan atau belum
 if (isset($_POST["submit"])){
-    if (ubahSistem($_POST)){
+    if (ubahAktor($_POST)){
         echo "
         <script>
             alert('Perubahan berhasil disimpan!');
-            document.location.href = 'index.php'
+            document.location.href = 'detail-sistem.php?id=".$idSistem."'
         </script>
         ";
     } else {
         echo "
         <script>
         alert('Perubahan gagal disimpan!');
-        document.location.href = 'index.php'
+        document.location.href = 'detail-sistem.php?id=".$idSistem."'
         </script>";
     }
 
@@ -30,12 +31,14 @@ if (isset($_POST["submit"])){
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Ubah Data Sistem</h1>
+                <h1 class="m-0 text-dark">Ubah Data Aktor</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Kelola Data Sistem</li>
+                    <li class="breadcrumb-item active"><a href="index.php">Kelola Data Sistem</a></li>
+                    <li class="breadcrumb-item active">Ubah Data Aktor</li>
+
                 </ol>
             </div><!-- /.col -->
         </div><!-- /.row -->
@@ -52,16 +55,16 @@ if (isset($_POST["submit"])){
         <div class="col-12">
             <dic class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Data Sistem</h3>
+                    <h3 class="card-title">Data Aktor</h3>
                 </div>
 
                 <div class="card-body">
                     <form action="" method="POST">
                         <div class="form-group row">
-                            <label for="nama=sistem" class="col-sm-2 col-form-label">Nama Sistem</label>
+                            <label for="nama-aktor" class="col-sm-2 col-form-label">Nama Aktor</label>
                             <div class="col-sm-10">
-                                <input name="id-sistem" value="<?=$idSistem?>" placeholder="Masukkan nama sistem..." type="text" class="form-control" id="nama=sistem" hidden>
-                                <input name="nama-sistem" value="<?= $sistem[0]['nama_sistem']?>" placeholder="Masukkan nama sistem..." type="text" class="form-control" id="nama=sistem">
+                                <input name="id-aktor" value="<?=$idAktor?>" type="text" class="form-control" id="nama=aktor" hidden>
+                                <input required name="nama-aktor" value="<?= $aktor[0]['nama_aktor']?>" placeholder="Masukkan nama aktor..." type="text" class="form-control" id="nama=aktor">
                             </div>
                         </div>
 

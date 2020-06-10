@@ -7,6 +7,13 @@ $fitur = detailFitur($id_fitur);
 $sql = "SELECT * FROM `fitur` WHERE id_fitur = '$id_fitur'";
 $nama_fitur = query($sql);
 
+$idAktor = $nama_fitur[0]['id_aktor'];
+$sql = "SELECT * FROM `aktor` WHERE id_aktor = '$idAktor'";
+$aktor = query($sql);
+
+$idSistem = $aktor[0]['id_sistem'];
+$sql = "SELECT * FROM `sistem` WHERE id_sistem = '$idSistem'";
+$sistem = query($sql);
 
 if (isset($_POST["submit"])){
   // var_dump(explode(PHP_EOL,$_POST['scenario-normal']));die;
@@ -39,6 +46,8 @@ if (isset($_POST["submit"])){
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
                     <li class="breadcrumb-item"><a href="index.php">Kelola Data Sistem</a></li>
+                    <li class="breadcrumb-item"><a href="detail-aktor.php?id=<?=$idSistem?>">Detail Sistem : <?= $sistem[0]['nama_sistem']?></a></li>
+                    <li class="breadcrumb-item"><a href="detail-aktor.php?id=<?=$idAktor?>">Detail Aktor : <?= $aktor[0]['nama_aktor']?></a></li>
                     <li class="breadcrumb-item active">Detail Fitur :  <?= $nama_fitur[0]['nama_fitur']?></li>
                 </ol>
             </div><!-- /.col -->
@@ -67,7 +76,13 @@ if (isset($_POST["submit"])){
               </div>
               <div class="form-group">
                 <label for="inputName">Nama Fitur</label>
-                <input type="text" id="inputName" class="form-control" value="<?= $fitur[0]['nama_fitur']?>" disabled>
+                <input 
+                <?php if($fitur[0]['nama_fitur'] != ''):?>
+                  value='<?= $fitur[0]['nama_fitur'] ?>'
+                <?php endif ?>
+                
+                
+                name="nama-fitur" type="text" id="inputName" class="form-control" value="<?= $fitur[0]['nama_fitur']?>">
               </div>
               <div class="form-group">
                 <label for="deskripsi-fitur">Deskripsi Fitur</label>
