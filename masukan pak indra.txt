@@ -32,3 +32,6 @@ Kenapa? karena apabila 1 fitur bbrp view, bingung menentukan component_view yang
 1. Membuka tampilan @halaman_login_admin
 2. Mengisikan #form_username dan #form_password
 3. Menekan #tombol_login                
+
+
+1 fitur = 1 @halaman_view (view ini mencakup semua scenario)
