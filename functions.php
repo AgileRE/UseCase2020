@@ -72,14 +72,14 @@ function tambahScenario($data, $id_fitur){
 
             $sql = "SELECT * FROM `view` WHERE id_fitur ='$id_fitur'";                        
             $id_view = query($sql)[0]['id_view'];
-            echo "Update " .$value2." ke tabel view";      
-            echo "<br>";
+            // echo "Update " .$value2." ke tabel view";      
+            // echo "<br>";
             
           } else {
             $sql = "INSERT INTO `view` (id_fitur, nama_view) VALUES ('$id_fitur', '$value2')";
             mysqli_query($conn, $sql);
-            echo "Masukkan " .$value2." ke tabel view";      
-            echo "<br>";
+            // echo "Masukkan " .$value2." ke tabel view";      
+            // echo "<br>";
 
             $id_view = mysqli_insert_id($conn);
           }
@@ -97,14 +97,177 @@ function tambahScenario($data, $id_fitur){
         if (strpos($value2, '#') !== false) {
           //ambil id @view yang barusan dimasukkan
           //masukkan id view dan nama_component ke tabel component_view   
+
+          $index_underscore = strpos($value2, '_');
+          $tipe_component = substr($value2, 0, $index_underscore);
+          
+          if($tipe_component == '#form'){
+            $tipe_fix = 'Form';
+          } elseif ($tipe_component == '#tombol') {
+            $tipe_fix = 'Tombol';
+          } elseif ($tipe_component == '#tabel') {
+            $tipe_fix = 'Tabel';
+          } else {
+            $tipe_fix = 'Belum ditentukan';
+          }          
+          
+
           $sql = "SELECT * FROM `component_view` WHERE nama_component = '$value2'";
           $jumlahRecord = count(query($sql));
           
           if ($jumlahRecord == 0){
-            echo "Masukkan ".$value2." ke tabel component view";      
-            echo "<br>";
+            // echo "Masukkan ".$value2." ke tabel component view";      
+            // echo "<br>";
 
-            $sql = "INSERT INTO `component_view` (id_view, nama_component) VALUES ('$id_view', '$value2')";
+            $sql = "INSERT INTO `component_view` (id_view, nama_component, jenis_component) VALUES ('$id_view', '$value2', '$tipe_fix')";
+            mysqli_query($conn, $sql);            
+          }
+          
+        }     
+      }
+  
+    }
+    
+    //tiap baris di textarea scenarioAlternatif divek apakah punya @halaman_view
+    foreach ($arraySA as $key => $value) {
+      $pecah = explode(" ",$value);
+
+      foreach ($pecah as $key => $value2) {
+        if (strpos($value2, '@') !== false) {
+          //masukkan @halaman_view ke tabel 'view'  
+          
+          
+
+          $sql = "SELECT * FROM `view` WHERE id_fitur = '$id_fitur'";
+          $jumlahRecord = count(query($sql));
+
+          if ($jumlahRecord > 0){
+            $sql = "UPDATE `view` SET nama_view = '$value2' WHERE id_fitur = '$id_fitur'";
+            mysqli_query($conn, $sql);
+
+            $sql = "SELECT * FROM `view` WHERE id_fitur ='$id_fitur'";                        
+            $id_view = query($sql)[0]['id_view'];
+            // echo "Update " .$value2." ke tabel view";      
+            // echo "<br>";
+            
+          } else {
+            $sql = "INSERT INTO `view` (id_fitur, nama_view) VALUES ('$id_fitur', '$value2')";
+            mysqli_query($conn, $sql);
+            // echo "Masukkan " .$value2." ke tabel view";      
+            // echo "<br>";
+
+            $id_view = mysqli_insert_id($conn);
+          }
+          
+        }    
+      }
+            
+    }    
+
+    foreach ($arraySA as $key => $value) {
+      $pecah = explode(" ",$value);
+
+      foreach ($pecah as $key2 => $value2) {
+        # code...
+        if (strpos($value2, '#') !== false) {
+          //ambil id @view yang barusan dimasukkan
+          //masukkan id view dan nama_component ke tabel component_view   
+
+          
+          $index_underscore = strpos($value2, '_');
+          $tipe_component = substr($value2, 0, $index_underscore);
+          
+          if($tipe_component == '#form'){
+            $tipe_fix = 'Form';
+          } elseif ($tipe_component == '#tombol') {
+            $tipe_fix = 'Tombol';
+          } elseif ($tipe_component == '#tabel') {
+            $tipe_fix = 'Tabel';
+          } else {
+            $tipe_fix = 'Belum ditentukan';
+          }          
+          
+          $sql = "SELECT * FROM `component_view` WHERE nama_component = '$value2'";
+          $jumlahRecord = count(query($sql));
+          
+          if ($jumlahRecord == 0){
+            // echo "Masukkan ".$value2." ke tabel component view";      
+            // echo "<br>";
+
+            $sql = "INSERT INTO `component_view` (id_view, nama_component, jenis_component) VALUES ('$id_view', '$value2','$tipe_fix')";
+            mysqli_query($conn, $sql);
+          }
+          
+        }     
+      }
+  
+    }
+
+    //tiap baris di textarea scenarioException divek apakah punya @halaman_view
+    foreach ($arraySE as $key => $value) {
+      $pecah = explode(" ",$value);
+
+      foreach ($pecah as $key => $value2) {
+        if (strpos($value2, '@') !== false) {
+          //masukkan @halaman_view ke tabel 'view'         
+
+          $sql = "SELECT * FROM `view` WHERE id_fitur = '$id_fitur'";
+          $jumlahRecord = count(query($sql));
+
+          if ($jumlahRecord > 0){
+            $sql = "UPDATE `view` SET nama_view = '$value2' WHERE id_fitur = '$id_fitur'";
+            mysqli_query($conn, $sql);
+
+            $sql = "SELECT * FROM `view` WHERE id_fitur ='$id_fitur'";                        
+            $id_view = query($sql)[0]['id_view'];
+            // echo "Update " .$value2." ke tabel view";      
+            // echo "<br>";
+            
+          } else {
+            $sql = "INSERT INTO `view` (id_fitur, nama_view) VALUES ('$id_fitur', '$value2')";
+            mysqli_query($conn, $sql);
+            // echo "Masukkan " .$value2." ke tabel view";      
+            // echo "<br>";
+
+            $id_view = mysqli_insert_id($conn);
+          }
+          
+        }    
+      }
+            
+    }    
+
+    foreach ($arraySE as $key => $value) {
+      $pecah = explode(" ",$value);
+
+      foreach ($pecah as $key2 => $value2) {
+        # code...
+        if (strpos($value2, '#') !== false) {
+          //ambil id @view yang barusan dimasukkan
+          //masukkan id view dan nama_component ke tabel component_view   
+
+          
+          $index_underscore = strpos($value2, '_');
+          $tipe_component = substr($value2, 0, $index_underscore);
+          
+          if($tipe_component == '#form'){
+            $tipe_fix = 'Form';
+          } elseif ($tipe_component == '#tombol') {
+            $tipe_fix = 'Tombol';
+          } elseif ($tipe_component == '#tabel') {
+            $tipe_fix = 'Tabel';
+          } else {
+            $tipe_fix = 'Belum ditentukan';
+          }          
+                    
+          $sql = "SELECT * FROM `component_view` WHERE nama_component = '$value2'";
+          $jumlahRecord = count(query($sql));
+          
+          if ($jumlahRecord == 0){
+            // echo "Masukkan ".$value2." ke tabel component view";      
+            // echo "<br>";
+
+            $sql = "INSERT INTO `component_view` (id_view, nama_component, jenis_component) VALUES ('$id_view', '$value2', '$tipe_fix')";
             mysqli_query($conn, $sql);
           }
           
@@ -133,10 +296,24 @@ function tambahScenario($data, $id_fitur){
     $query = "UPDATE `fitur` SET deskripsi = '$deskripsiFitur', kondisi_awal = '$kondisiAwal', kondisi_akhir = '$kondisiAkhir', scenario_normal = '$scenarioNormal', scenario_alternatif = '$scenarioAlternatif', scenario_exception = '$scenarioException' WHERE id_fitur = '$id_fitur'";
 
     
+    
+  
+    return mysqli_query($conn, $query);
+  }
+
+  function simpanTitle($data){
+    global $conn;
+  
+    $namaTitle = htmlspecialchars($data["nama-title"]);  
+    $idView = htmlspecialchars($data["id-view"]);  
+
+  
+    $query = "UPDATE `view` SET title = '$namaTitle' WHERE id_view = $idView";
     mysqli_query($conn, $query);
   
-    return mysqli_affected_rows($conn);
+    return mysqli_query($conn, $query);
   }
+  
 
 function tambahSistem($data){
   global $conn;

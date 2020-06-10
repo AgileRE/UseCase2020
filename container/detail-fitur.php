@@ -10,7 +10,7 @@ $nama_fitur = query($sql);
 
 if (isset($_POST["submit"])){
   // var_dump(explode(PHP_EOL,$_POST['scenario-normal']));die;
-    if (tambahScenario($_POST, $id_fitur) > 0){
+    if (tambahScenario($_POST, $id_fitur)){
         echo "
         <script>
             alert('Scenario berhasil disimpan!');
@@ -116,8 +116,8 @@ placeholder="1. ________
 placeholder="1. ________
 2. ________
 3. ________">
-<?php if($fitur[0]['scenario_exception'] != ''):?>
-<?= $fitur[0]['scenario_exception'] ?>
+<?php if($fitur[0]['scenario_alternatif'] != ''):?>
+<?= $fitur[0]['scenario_alternatif'] ?>
                 <?php endif ?>
                 </textarea>
               </div>
@@ -127,8 +127,8 @@ placeholder="1. ________
 placeholder="1. ________
 2. ________
 3. ________">
-<?php if($fitur[0]['scenario_alternatif'] != ''):?>
-<?= $fitur[0]['scenario_alternatif'] ?>
+<?php if($fitur[0]['scenario_exception'] != ''):?>
+<?= $fitur[0]['scenario_exception'] ?>
                 <?php endif ?>
                 </textarea>
               </div>

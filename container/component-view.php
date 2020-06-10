@@ -1,13 +1,39 @@
+<?php 
+    include('functions.php');
+    if (isset($_POST["submit"])){
+        if (simpanTitle($_POST)){
+            echo "
+            <script>
+                alert('Informasi title berhasil disimpan!');
+                history.go(-1);                
+            </script>
+            ";
+        } else {
+            echo "
+            <script>
+            alert('Informasi title gagal disimpan!');
+            history.go(-1);        
+            </script>";
+        }
+    
+    }
+
+    $id_fitur = $_GET['id'];    
+    $nama_fitur = query("SELECT * FROM fitur WHERE id_fitur = $id_fitur");    
+    $view = query("SELECT * FROM view WHERE id_fitur = $id_fitur");     
+    $component_view = query("SELECT nama_component, jenis_component FROM `component_view` INNER JOIN `view` ON component_view.id_view = view.id_view INNER JOIN `fitur` ON fitur.id_fitur = view.id_fitur WHERE fitur.id_fitur ='$id_fitur'");    
+?>
+
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Component View : Fitur 1</h1>
+                <h1 class="m-0 text-dark">Data View dan Component : <br> <?= $nama_fitur[0]['nama_fitur']?></h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Component View</li>
+                    <li class="breadcrumb-item active">Data View dan Component</li>
                 </ol>
             </div><!-- /.col -->
         </div><!-- /.row -->
@@ -19,11 +45,37 @@
 <div class="content">
     <div class="container-fluid">
 
+    <div class="row">
+        <div class="col-12">
+            <dic class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Informasi View</h3>
+                </div>
+
+                <div class="card-body">
+                    <form action="" method="POST">
+                        <div class="form-group row">
+                            <label for="nama=sistem" class="col-sm-2 col-form-label">Title Halaman</label>
+                            <div class="col-sm-10">
+                                <input name="id-view" value="<?=$view[0]['id_view']?>" placeholder="Masukkan title halaman..." type="text" class="form-control" id="nama=sistem" hidden>
+                                <input name="nama-title" value="<?=$view[0]['title']?>" placeholder="Masukkan title halaman..." type="text" class="form-control" id="nama=sistem">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <button class="btn btn-success btn-block" name="submit" type="submit">Simpan Informasi</button>
+                        </div>
+                    </form>
+                </div>
+            </dic>
+        </div>
+    </div>
+
         <div class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Tabel Data Component View</h3>
+                        <h3 class="card-title">Tabel Data Component</h3>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -55,12 +107,14 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php for($i=1;$i<5;$i++): ?>
+                                            <?php 
+                                            $i=1;
+                                            foreach($component_view as $component): ?>
                                             <tr role="row"
                                                 class="<?php if($i%2==0): echo "even"; else: echo "odd"; endif?>">
                                                 <td class="sorting_1"><?= $i ?></td>
-                                                <td>Component <?= $i ?></td>
-                                                <td>Tabel</td>
+                                                <td><?= $component['nama_component'] ?></td>
+                                                <td><?= $component['jenis_component'] ?></td>
                                                 <td>
                                                     <a href="ubah-component.php" class="btn btn-sm btn-warning">Ubah</a>
                                                     <!-- Split button -->
@@ -68,17 +122,10 @@
                                                     <a href="hapus-fitur.php" class="btn btn-sm btn-danger">Hapus</a>
                                                 </td>
                                             </tr>
-                                            <?php endfor ?>
-                                        </tbody>
-                                        <tfoot>
-
-                                            <tr>
-                                                <th rowspan="1" colspan="1">No</th>
-                                                <th rowspan="1" colspan="1">Nama Component</th>
-                                                <th rowspan="1" colspan="1">Tipe</th>
-                                                <th rowspan="1" colspan="1">Aksi</th>
-                                            </tr>
-                                        </tfoot>
+                                            <?php
+                                            $i++;
+                                            endforeach ?>
+                                        </tbody>               
                                     </table>
                                 </div>
                             </div>
