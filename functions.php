@@ -454,6 +454,12 @@ function hapusFitur($id_fitur){
   return mysqli_affected_rows($conn);
 }
 
+function hapusComponent($id_component){
+  global $conn;
+  mysqli_query($conn, "DELETE FROM component_view WHERE id_component = $id_component");
+  return mysqli_affected_rows($conn);
+}
+
 function ubah($data){
   global $conn;
   $id = $data["id"];

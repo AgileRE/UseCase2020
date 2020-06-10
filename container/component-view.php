@@ -28,7 +28,7 @@
         $idView =$view[0]['id_view'];
         $title =$view[0]['title'];
     }
-    $component_view = query("SELECT nama_component, jenis_component FROM `component_view` INNER JOIN `view` ON component_view.id_view = view.id_view INNER JOIN `fitur` ON fitur.id_fitur = view.id_fitur WHERE fitur.id_fitur ='$id_fitur'");    
+    $component_view = query("SELECT id_component, nama_component, jenis_component FROM `component_view` INNER JOIN `view` ON component_view.id_view = view.id_view INNER JOIN `fitur` ON fitur.id_fitur = view.id_fitur WHERE fitur.id_fitur ='$id_fitur'");    
     $id_fitur = $_GET['id'];
     
 
@@ -145,7 +145,7 @@
                                                     <a href="ubah-component.php" class="btn btn-sm btn-warning">Ubah</a>
                                                     <!-- Split button -->
 
-                                                    <a href="hapus-fitur.php" class="btn btn-sm btn-danger">Hapus</a>
+                                                    <a href="hapus-component.php?id=<?= $component['id_component'] ?>" class="btn btn-sm btn-danger">Hapus</a>
                                                 </td>
                                             </tr>
                                             <?php
