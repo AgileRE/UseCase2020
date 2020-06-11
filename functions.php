@@ -356,7 +356,7 @@ function ubahAktor($data){
 }
 
 function ubahComponent($data){
-  // global $conn;
+  global $conn;
   // $idAktor = $data["id-aktor"];
   // $namaAktor = htmlspecialchars($data["nama-aktor"]);
 
@@ -364,9 +364,74 @@ function ubahComponent($data){
   //             nama_aktor = '$namaAktor'        
   //             WHERE id_aktor = $idAktor";
  
-  echo "Ubah!";
+  // echo "Ubah!";
+  $idComponent = $_POST['id-component'];
+  $namaComponent = $_POST['nama-component'];
+  $tipeComponent = $_POST['tipe-component'];
+  
+  if($tipeComponent == "Belum Ditentukan"){
+    echo "<script>alert('Tipe component harus ditentukan!')</script>";
+    return false;    
+  }
+ 
 
-  return  mysqli_query($conn, $query);
+  $componentAsli = query("SELECT * FROM `component_view` WHERE id_component = $idComponent");
+  $tipeComponentAsli =  $componentAsli[0]['jenis_component'];
+
+  //hapus dulu data info component di tiap tabel ybs, yang lama sebelum update
+  if ($tipeComponentAsli == "Form") {
+    $sql = "DELETE FROM `info_form` WHERE `info_form`.`id_component_view` = $idComponent";
+    mysqli_query($conn, $sql);
+  } elseif($tipeComponentAsli == "Table"){    
+    $sql = "DELETE FROM `info_tabel` WHERE `info_tabel`.`id_component_view` = $idComponent";
+    mysqli_query($conn, $sql);
+  } elseif($tipeComponentAsli == "Tombol"){
+    $sql = "DELETE FROM `info_tombol` WHERE `info_tombol`.`id_component_view` = $idComponent";
+    mysqli_query($conn, $sql);
+  } 
+  
+
+  //update info component nama, jenis untuk tabel component_view
+  $query = "UPDATE component_view SET
+              nama_component = '$namaComponent',
+              jenis_component = '$tipeComponent'
+              WHERE id_component = $idComponent";
+  
+  mysqli_query($conn, $query);
+
+  //insert data info component yang baru sesuai tipe componentnya
+  if ($tipeComponent == "Form") {
+    $label = $_POST['label-form'];
+    $tipe = $_POST['tipe-form'];
+    $placeholder = $_POST['placeholder-form'];
+    $sql = "INSERT INTO `info_form` (id_component_view, label_form, tipe_form, placeholder_form) VALUES ('$idComponent', '$label', '$tipe', '$placeholder')";
+    
+    mysqli_query($conn, $sql);
+
+  } elseif($tipeComponent == "Table"){
+     
+    $jumlahKolom = 0;
+    foreach ($_POST as $key => $value) {
+      // var_dump(strpos($key, '-kolom-'));
+      // echo "<br>";
+      if(strpos($key, 'nama-kolom-') !== false){
+        $jumlahKolom++;        
+        $sql = "INSERT INTO `info_tabel` (id_component_view, nama_kolom) VALUES ('$idComponent', '$value')";                
+        mysqli_query($conn, $sql);
+      }
+    }  
+    
+  } elseif($tipeComponent == "Tombol"){
+    $namaTombol = $_POST['nama-tombol'];
+    $tipeTombol = $_POST['tipe-tombol'];        
+    $sql = "INSERT INTO `info_tombol` (id_component_view, nama_tombol, jenis_tombol) VALUES ('$idComponent', '$namaTombol', '$tipeTombol')";        
+    mysqli_query($conn, $sql);
+  } else {
+    echo "<script>alert('Tipe component harus ditentukan!')</script>";
+    return false;
+  }
+  
+  return mysqli_affected_rows($conn);
 }
 
 

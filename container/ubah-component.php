@@ -1,5 +1,4 @@
 <?php
-
 include('functions.php');
 
     $id_component = $_GET['id'];          
@@ -80,16 +79,84 @@ if (isset($_POST["submit"])){
                         <div class="form-group row">
                             <label for="nama-aktor" class="col-sm-2 col-form-label">Nama Component</label>
                             <div class="col-sm-10">
-                                <input name="id-aktor" value="<?=$id_component?>" type="text" class="form-control" hidden>
+                                <input name="id-component" value="<?=$id_component?>" type="text" class="form-control" hidden>
                                 <input required name="nama-component" value="<?= $component[0]['nama_component']?>" placeholder="Masukkan nama component..." type="text" class="form-control" id="nama-component">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="nama-aktor" class="col-sm-2 col-form-label">Tipe Component</label>
-                            <div class="col-sm-10">
-                                <select name="tipe-component" id=""></select>
+                            <label for="tipe-component" class="col-sm-2 col-form-label">Tipe Component</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" name="tipe-component" id="tipe-component">
+                                    <option <?php if($component[0]['jenis_component'] == "Belum Ditentukan"): echo "selected"; endif; ?> value="Belum Ditentukan">Belum Ditentukan</option>
+                                    <option <?php if($component[0]['jenis_component'] == "Form"): echo "selected"; endif; ?> value="Form">Form</option>
+                                    <option <?php if($component[0]['jenis_component'] == "Table"): echo "selected"; endif; ?> value="Table">Table</option>
+                                    <option <?php if($component[0]['jenis_component'] == "Tombol"): echo "selected"; endif; ?> value="Tombol">Tombol</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-2">
+                                <button class="btn btn-warning btn-block" name="tetapkan" type="submit">Tetapkan</button>
                             </div>
                         </div>
+                        <?php if(isset($_POST["tetapkan"])): ?>
+                        
+                            <?php if ($_POST["tipe-component"] == "Belum Ditentukan"): ?>
+                            <script>
+                                alert("Anda harus menentukan tipe component terlebih dahulu");
+                            </script>
+                            <?php elseif($_POST["tipe-component"] == "Form"): ?>
+                                <div class="form-group row">                               
+                                    <label for="label-form" class="col-sm-2 col-form-label">Label Form</label>
+                                    <div class="col-sm-10">                                    
+                                        <input name="label-form" placeholder="Masukkan label form..." type="text" class="form-control" id="nama-tombol   ">
+                                    </div>
+                                </div>
+                                <div class="form-group row">                               
+                                    <label for="tipe-form" class="col-sm-2 col-form-label">Tipe Form</label>
+                                    <div class="col-sm-10">                                    
+                                        <input name="tipe-form" placeholder="Masukkan tipe form..." type="text" class="form-control" id="nama-tombol   ">
+                                    </div>
+                                </div>
+                                <div class="form-group row">                               
+                                    <label for="placeholder-form" class="col-sm-2 col-form-label">Placeholder Form</label>
+                                    <div class="col-sm-10">                                    
+                                        <input name="placeholder-form" placeholder="Masukkan placeholder form..." type="text" class="form-control" id="nama-tombol   ">
+                                    </div>
+                                </div>
+                            <?php elseif($_POST["tipe-component"] == "Table"): ?>
+                                <div class="form-group row">                               
+                                    <label for="jumlah-kolom" class="col-sm-2 col-form-label">Jumlah Kolom</label>
+                                    <div class="col-sm-8">                                    
+                                        <input name="jumlah-kolom" placeholder="Masukkan jumlah kolom..." type="text" class="form-control" id="nama-tombol   ">
+                                    </div>
+                                    <div class="col-sm-2">                                    
+                                        <button class="btn btn-warning btn-block" name="tetapkan-kolom" type="submit">Tetapkan</button>
+                                    </div>
+                                </div>                                
+                            <?php elseif($_POST["tipe-component"] == "Tombol"): ?> 
+                                <div class="form-group row">                               
+                                    <label for="nama-tombol" class="col-sm-2 col-form-label">Nama Tombol</label>
+                                    <div class="col-sm-10">                                    
+                                        <input name="nama-tombol" placeholder="Masukkan nama tombol..." type="text" class="form-control" id="nama-tombol   ">
+                                    </div>
+                                </div>
+                                <div class="form-group row">                               
+                                    <label for="tipe-tombol" class="col-sm-2 col-form-label">Tipe Tombol</label>
+                                    <div class="col-sm-10">                                    
+                                        <input name="tipe-tombol" placeholder="Masukkan tipe tombol..." type="text" class="form-control" id="nama-tombol   ">
+                                    </div>
+                                </div>
+                            <?php endif ?>                        
+                        <?php endif ?>
+                        <?php if(isset($_POST["tetapkan-kolom"])): ?>
+                            <?php for($i=1;$i<=$_POST["jumlah-kolom"];$i++): ?>
+                                <div class="form-group row">                               
+                                    <label for="nama-kolom-<?= $i ?>" class="col-sm-2 col-form-label">Nama Kolom</label>
+                                    <div class="col-sm-10">                                    
+                                        <input name="nama-kolom-<?= $i ?>" placeholder="Masukkan nama kolom..." type="text" class="form-control" id="nama-tombol   ">
+                                    </div>                                            
+                                </div>
+                            <?php endfor ?>
+                        <?php endif ?>
 
                         <div class="row">
                             <button class="btn btn-success btn-block" name="submit" type="submit">Simpan Perubahan</button>
