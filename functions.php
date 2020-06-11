@@ -355,6 +355,19 @@ function ubahAktor($data){
   return  mysqli_query($conn, $query);
 }
 
+function ubahComponent($data){
+  // global $conn;
+  // $idAktor = $data["id-aktor"];
+  // $namaAktor = htmlspecialchars($data["nama-aktor"]);
+
+  // $query = "UPDATE aktor SET
+  //             nama_aktor = '$namaAktor'        
+  //             WHERE id_aktor = $idAktor";
+ 
+  echo "Ubah!";
+
+  return  mysqli_query($conn, $query);
+}
 
 
 function tambahAktor($data, $id_sistem){

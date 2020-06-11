@@ -1,13 +1,61 @@
+<?php
+
+include('functions.php');
+
+    $id_component = $_GET['id'];          
+    $component = query("SELECT * FROM component_view WHERE id_component = $id_component");    
+    
+
+    $idView = $component[0]['id_view'];
+    $view = query("SELECT * FROM view WHERE id_view = $idView");  
+    
+
+    $idFitur = $view[0]['id_fitur'];
+    $fitur = query("SELECT * FROM fitur WHERE id_fitur = $idFitur");          
+
+    $idAktor = $fitur[0]['id_aktor'];
+    $sql = "SELECT * FROM `aktor` WHERE id_aktor = '$idAktor'";
+    $aktor = query($sql);
+
+    $idSistem = $aktor[0]['id_sistem'];
+    $sql = "SELECT * FROM `sistem` WHERE id_sistem = '$idSistem'";
+    $sistem = query($sql);
+
+// cek apakah tombol submit sudah ditekan atau belum
+if (isset($_POST["submit"])){
+    if (ubahComponent($_POST)){
+        echo "
+        <script>
+            alert('Perubahan berhasil disimpan!');
+            document.location.href = 'component-view.php?id=".$idFitur."'
+        </script>
+        ";
+    } else {
+        echo "
+        <script>
+        alert('Perubahan gagal disimpan!');
+        document.location.href = 'component-view.php?id=".$idFitur."'
+        </script>";
+    }
+}
+
+?>
+
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Component View : Fitur 1</h1>
+                <h1 class="m-0 text-dark">Ubah Data Aktor</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Component View</li>
+                    <li class="breadcrumb-item"><a href="index.php">Kelola Data Sistem</a></li>  
+                    <li class="breadcrumb-item"><a href="detail-aktor.php?id=<?=$idSistem?>">Data Sistem : <?= $sistem[0]['nama_sistem']?></a></li>
+                    <li class="breadcrumb-item"><a href="detail-aktor.php?id=<?=$idAktor?>">Data Aktor : <?= $aktor[0]['nama_aktor']?></a></li> 
+                    <li class="breadcrumb-item"><a href="detail-fitur.php?id=<?= $idFitur ?>">Detail Fitur  : <?= $fitur[0]['nama_fitur'] ?></a></li>  
+                    <li class="breadcrumb-item"><a href="component-view.php?id=<?= $idFitur ?>">Data View dan Component</a></li>  
+                    <li class="breadcrumb-item active">Ubah : Data View dan Component</li>
                 </ol>
             </div><!-- /.col -->
         </div><!-- /.row -->
@@ -16,77 +64,40 @@
 <!-- /.content-header -->
 
 <!-- Main content -->
-<div class="card">
-    <div class="card-header">
-        <h3 class="card-title">Tabel Data Komponen 1</h3>
-    </div>
-    <!-- /.card-header -->
-    <div class="card-body">
-        <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
-          <div class="row">
-              <div class="col-sm-12">
-                  <table id="example1" class="text-center table table-bordered table-striped dataTable" role="grid"
-                      aria-describedby="example1_info">
-                      <thead>
-                          <tr role="row">
-                              <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1"
-                                  colspan="1" aria-sort="ascending"
-                                  aria-label="Rendering engine: activate to sort column descending"
-                                  style="width: 5px;">No</th>
-                              <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
-                                  colspan="1" aria-label="Browser: activate to sort column ascending"
-                                  style="width: 219px;">Component View</th>
-                              <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
-                                  colspan="1" aria-label="Platform(s): activate to sort column ascending"
-                                  style="width: 194px;">Aksi</th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                        <?php for($i=1;$i<5;$i++): ?>
-                            <tr role="row" class="<?php if($i%2==0): echo "even"; else: echo "odd"; endif?>">
-                                <td class="sorting_1"><?= $i ?></td>
-                                <td>Component VIew <?= $i ?></td>
-                                <td>
-                                  <!--  <a href="ubah-component.php" class="btn btn-sm btn-warning">Ubah</a> -->
-                                  <div class="btn-group">
-                                    <button type="button" class="btn btn-success btn-success">Jenis</button>
-                                    <button type="button" class="btn btn-success btn-success dropdown-toggle px-1" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                    <span class="sr-only">Toggle Dropdown</span>
-                                  </button>
-                                  <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Form</a>
-                                    <a class="dropdown-item" href="#">Tabel</a>
-                                  </div>
-                                </div>
-                                    <a href="#" class="btn btn-info">Submit</a>
-                                </td>
-                            </tr>
-                        <?php endfor ?>
-                        </tbody>
-                        <tfoot>
 
-                            <tr>
-                                <th rowspan="1" colspan="1">No</th>
-                                <th rowspan="1" colspan="1">Component View</th>
-                                <th rowspan="1" colspan="1">Aksi</th>
-                            </tr>
-                        </tfoot>
-                    </table>
+<div class="content">
+    <div class="container-fluid">
+
+    <div class="row">
+        <div class="col-12">
+            <dic class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Data Component View</h3>
                 </div>
-            </div>
 
+                <div class="card-body">
+                    <form action="" method="POST">
+                        <div class="form-group row">
+                            <label for="nama-aktor" class="col-sm-2 col-form-label">Nama Component</label>
+                            <div class="col-sm-10">
+                                <input name="id-aktor" value="<?=$id_component?>" type="text" class="form-control" hidden>
+                                <input required name="nama-component" value="<?= $component[0]['nama_component']?>" placeholder="Masukkan nama component..." type="text" class="form-control" id="nama-component">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="nama-aktor" class="col-sm-2 col-form-label">Tipe Component</label>
+                            <div class="col-sm-10">
+                                <select name="tipe-component" id=""></select>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <button class="btn btn-success btn-block" name="submit" type="submit">Simpan Perubahan</button>
+                        </div>
+                    </form>
+                </div>
+            </dic>
         </div>
-      </div>
-      </div>
-
-      <a href="index.php" class="btn btn-success btn-block">Simpan Data</a>
-    </div>
-      <!-- /.card-body -->
-      </div>
-
-      </div>
-      <!-- /.row -->
-      </div><!-- /.container-fluid -->
-      </div>
-      <!-- /.content -->
+    </div>       
+</div>
+<!-- /.content -->

@@ -142,7 +142,7 @@
                                                 <td><?= $component['nama_component'] ?></td>
                                                 <td><?= $component['jenis_component'] ?></td>
                                                 <td>
-                                                    <a href="ubah-component.php" class="btn btn-sm btn-warning">Ubah</a>
+                                                    <a href="ubah-component.php?id=<?= $component['id_component']?>" class="btn btn-sm btn-warning">Ubah</a>
                                                     <!-- Split button -->
 
                                                     <a href="hapus-component.php?id=<?= $component['id_component'] ?>" class="btn btn-sm btn-danger">Hapus</a>
