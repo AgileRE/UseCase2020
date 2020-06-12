@@ -365,6 +365,7 @@ function ubahComponent($data){
   //             WHERE id_aktor = $idAktor";
  
   // echo "Ubah!";
+  
   $idComponent = $_POST['id-component'];
   $namaComponent = $_POST['nama-component'];
   $tipeComponent = $_POST['tipe-component'];
@@ -382,7 +383,7 @@ function ubahComponent($data){
   if ($tipeComponentAsli == "Form") {
     $sql = "DELETE FROM `info_form` WHERE `info_form`.`id_component_view` = $idComponent";
     mysqli_query($conn, $sql);
-  } elseif($tipeComponentAsli == "Table"){    
+  } elseif($tipeComponentAsli == "Tabel"){    
     $sql = "DELETE FROM `info_tabel` WHERE `info_tabel`.`id_component_view` = $idComponent";
     mysqli_query($conn, $sql);
   } elseif($tipeComponentAsli == "Tombol"){
@@ -408,7 +409,7 @@ function ubahComponent($data){
     
     mysqli_query($conn, $sql);
 
-  } elseif($tipeComponent == "Table"){
+  } elseif($tipeComponent == "Tabel"){
      
     $jumlahKolom = 0;
     foreach ($_POST as $key => $value) {

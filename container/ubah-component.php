@@ -20,6 +20,23 @@ include('functions.php');
     $sql = "SELECT * FROM `sistem` WHERE id_sistem = '$idSistem'";
     $sistem = query($sql);
 
+    //cek inisial tipe component (ciri kas ubah data)
+    $tipeComponent = $component[0]['jenis_component'];
+    $jumlahDataTerdeteksi = 0; //belum ditentukan (component)
+    if($tipeComponent == "Form"){
+        $sql = "SELECT * FROM `info_form` WHERE id_component_view = '$id_component'";
+        $cek = query($sql);
+        $jumlahDataTerdeteksi = count($cek);
+    } elseif($tipeComponent == "Tabel") {
+        $sql = "SELECT * FROM `info_tabel` WHERE id_component_view = '$id_component'";
+        $cek = query($sql);
+        $jumlahDataTerdeteksi = count($cek);
+    } elseif($tipeComponent == "Tombol") {
+        $sql = "SELECT * FROM `info_tombol` WHERE id_component_view = '$id_component'";
+        $cek = query($sql);
+        $jumlahDataTerdeteksi = count($cek);
+    }
+
 // cek apakah tombol submit sudah ditekan atau belum
 if (isset($_POST["submit"])){
     if (ubahComponent($_POST)){
@@ -89,7 +106,7 @@ if (isset($_POST["submit"])){
                                 <select class="form-control" name="tipe-component" id="tipe-component">
                                     <option <?php if($component[0]['jenis_component'] == "Belum Ditentukan"): echo "selected"; endif; ?> value="Belum Ditentukan">Belum Ditentukan</option>
                                     <option <?php if($component[0]['jenis_component'] == "Form"): echo "selected"; endif; ?> value="Form">Form</option>
-                                    <option <?php if($component[0]['jenis_component'] == "Table"): echo "selected"; endif; ?> value="Table">Table</option>
+                                    <option <?php if($component[0]['jenis_component'] == "Tabel"): echo "selected"; endif; ?> value="Tabel">Tabel</option>
                                     <option <?php if($component[0]['jenis_component'] == "Tombol"): echo "selected"; endif; ?> value="Tombol">Tombol</option>
                                 </select>
                             </div>
@@ -122,7 +139,7 @@ if (isset($_POST["submit"])){
                                         <input name="placeholder-form" placeholder="Masukkan placeholder form..." type="text" class="form-control" id="nama-tombol   ">
                                     </div>
                                 </div>
-                            <?php elseif($_POST["tipe-component"] == "Table"): ?>
+                            <?php elseif($_POST["tipe-component"] == "Tabel"): ?>
                                 <div class="form-group row">                               
                                     <label for="jumlah-kolom" class="col-sm-2 col-form-label">Jumlah Kolom</label>
                                     <div class="col-sm-8">                                    
@@ -157,6 +174,53 @@ if (isset($_POST["submit"])){
                                 </div>
                             <?php endfor ?>
                         <?php endif ?>
+                        <?php if(!isset($_POST["tetapkan-kolom"]) && !isset($_POST["tetapkan"])): ?>
+                            <?php if($jumlahDataTerdeteksi > 0):?>
+                                <?php if($tipeComponent == "Form"): ?>
+                                    <div class="form-group row">                               
+                                        <label for="label-form" class="col-sm-2 col-form-label">Label Form</label>
+                                        <div class="col-sm-10">                                    
+                                            <input value="<?= $cek[0]['label_form']?>" name="label-form" placeholder="Masukkan label form..." type="text" class="form-control" id="nama-tombol   ">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">                               
+                                        <label for="tipe-form" class="col-sm-2 col-form-label">Tipe Form</label>
+                                        <div class="col-sm-10">                                    
+                                            <input value="<?= $cek[0]['tipe_form']?>" name="tipe-form" placeholder="Masukkan tipe form..." type="text" class="form-control" id="nama-tombol   ">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">                               
+                                        <label for="placeholder-form" class="col-sm-2 col-form-label">Placeholder Form</label>
+                                        <div class="col-sm-10">                                    
+                                            <input value="<?= $cek[0]['placeholder_form']?>" name="placeholder-form" placeholder="Masukkan placeholder form..." type="text" class="form-control" id="nama-tombol   ">
+                                        </div>
+                                    </div>
+                                <?php elseif($tipeComponent == "Tabel"): ?>                                    
+                                    <?php for($i=1;$i<=$jumlahDataTerdeteksi;$i++): ?>
+                                        <div class="form-group row">                               
+                                            <label for="nama-kolom-<?= $i ?>" class="col-sm-2 col-form-label">Nama Kolom</label>
+                                            <div class="col-sm-10">                                    
+                                                <input value="<?= $cek[$i-1]["nama_kolom"]?>" name="nama-kolom-<?= $i ?>" placeholder="Masukkan nama kolom..." type="text" class="form-control" id="nama-tombol   ">
+                                            </div>                                            
+                                        </div>
+                                    <?php endfor ?>
+                                <?php elseif($tipeComponent == "Tombol"): ?>
+                                    <div class="form-group row">                               
+                                        <label for="nama-tombol" class="col-sm-2 col-form-label">Nama Tombol</label>
+                                        <div class="col-sm-10">                                    
+                                            <input value="<?= $cek[0]['nama_tombol'] ?>" name="nama-tombol" placeholder="Masukkan nama tombol..." type="text" class="form-control" id="nama-tombol   ">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">                               
+                                        <label for="tipe-tombol" class="col-sm-2 col-form-label">Tipe Tombol</label>
+                                        <div class="col-sm-10">                                    
+                                            <input value="<?= $cek[0]['jenis_tombol'] ?>" name="tipe-tombol" placeholder="Masukkan tipe tombol..." type="text" class="form-control" id="nama-tombol   ">
+                                        </div>
+                                    </div>                                
+                                <?php endif; ?>
+                            <?php endif; ?>
+                        <?php endif; ?>
+
 
                         <div class="row">
                             <button class="btn btn-success btn-block" name="submit" type="submit">Simpan Perubahan</button>
@@ -167,4 +231,3 @@ if (isset($_POST["submit"])){
         </div>
     </div>       
 </div>
-<!-- /.content -->
