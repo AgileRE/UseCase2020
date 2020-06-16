@@ -488,14 +488,13 @@ function prosesGenerate($id_sistem){
       $fitur = query("SELECT * FROM `fitur` WHERE id_aktor = '$idAktor'");
       foreach($fitur as $fit){
         $namaFitur = $fit['nama_fitur'];
-        $namaFitur = strtolower($namaFitur);
-        $namaFitur = str_replace(" ", "-", $namaFitur);
+        $namaFileFitur = strtolower($namaFitur);
+        $namaFileFitur = str_replace(" ", "-", $namaFileFitur);
+        $namaFileFitur .= '.html';        
 
         //buat html
-        $fh = fopen("hasil/".$id_sistem."/".$namaAktor."/".$namaFitur.".html", 'w'); // or die("error");  
-        $stringData = '
-        
- 
+        $fh = fopen("hasil/".$id_sistem."/".$namaAktor."/".$namaFileFitur, 'w'); // or die("error");  
+        $bagianAtas = '        
 <!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
@@ -541,7 +540,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a href="#" class="brand-link">
       <img src="https://dimassatria.tech/psi/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
       <span class="brand-text font-weight-light">'.$namaSistem.'</span>
@@ -555,42 +554,46 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <img src="https://dimassatria.tech/psi/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">User 1</a>
+          <a href="#" class="d-block">'.$namaAktor.'</a>
         </div>
-      </div>
+      </div>';
 
-      <!-- Sidebar Menu -->
+      $bagianSidebar =
+      '<!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->          
-          <li class="nav-item">
-            <a href="index.php" class="nav-link active">              
-              <p>
-                Kelola Data Sistem
-                <!-- <span class="right badge badge-danger">New</span> -->
-              </p>
-            </a>
-          </li>
+               with font-awesome or any other icon font library -->'; 
 
-          <li class="nav-item">
-            <a href="generate-sistem.php" class="nav-link ">              
-              <p>
-                Generate Sistem
-                <!-- <span class="right badge badge-danger">New</span> -->
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="hasil-generate.php" class="nav-link ">              
-              <p>
-                Hasil Generate
-                <!-- <span class="right badge badge-danger">New</span> -->
-              </p>
-            </a>
-          </li>
+      foreach($fitur as $fit2){  
+        $namaFileFitur2 = strtolower($fit2['nama_fitur']);
+        $namaFileFitur2 = str_replace(" ", "-", $namaFileFitur2);
+        $namaFileFitur2 .= '.html';   
+        if($namaFitur == $fit2['nama_fitur']){
+          $bagianSidebar .=
+          '<li class="nav-item">
+          <a href="'.$namaFileFitur2.'" class="nav-link active">              
+            <p>'
+            .$fit2['nama_fitur'].           
+            '</p>
+          </a>
+        </li>';
+        }else {
+          $bagianSidebar .=
+        '<li class="nav-item">
+        <a href="'.$namaFileFitur2.'" class="nav-link">              
+          <p>'
+          .$fit2['nama_fitur'].           
+          '</p>
+        </a>
+      </li>';
+        }
+        
+      }
+         
 
-        </ul>
+      $bagianSidebar .=
+      '</ul>
       </nav>
       <!-- /.sidebar-menu -->
     </div>
@@ -739,7 +742,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 </body>
 </html>
-';   
+';  
+$stringData = $bagianAtas;
+$stringData .= $bagianSidebar; 
         fwrite($fh, $stringData);
         fclose($fh);
 
