@@ -441,10 +441,83 @@ function cekPernahGenerate($id_sistem){
   $jumlahCek = count($cek);
 
   if ($jumlahCek > 0){
+    // return $cek[0]['id_generate'];
     return true;
   }
 
   return false;
+}
+
+function rrmdir($dir) {
+  if (is_dir($dir)) {
+    $objects = scandir($dir);
+    foreach ($objects as $object) {
+      if ($object != "." && $object != "..") {
+        if (filetype($dir."/".$object) == "dir") 
+           rrmdir($dir."/".$object); 
+        else unlink   ($dir."/".$object);
+      }
+    }
+    reset($objects);
+    rmdir($dir);
+  }
+ }
+
+function prosesGenerate($id_sistem){
+  echo $id_sistem;
+  $cek = query("SELECT * FROM `generate` WHERE id_sistem = '$id_sistem'");
+
+  $aktor = query("SELECT * FROM `aktor` WHERE id_sistem = '$id_sistem'");
+  
+  
+  $jumlahCek = count($cek);
+
+  if ($jumlahCek > 0){ //kalau sudah ada datanya hapus dulu, baru buat ulang (generate ulang case )
+    rrmdir("hasil/".$id_sistem);
+    mkdir("hasil/".$id_sistem);
+  } else {
+    mkdir("hasil/".$id_sistem);
+    foreach($aktor as $akt){      
+      mkdir(getcwd()."/hasil/".$id_sistem."/".$akt['nama_aktor']);
+
+      //cari fitur
+      $idAktor = $akt['id_aktor'];
+      $namaAktor = $akt['nama_aktor'];
+      $fitur = query("SELECT * FROM `fitur` WHERE id_aktor = '$idAktor'");
+      foreach($fitur as $fit){
+        $namaFitur = $fit['nama_fitur'];
+        $namaFitur = strtolower($namaFitur);
+        $namaFitur = str_replace(" ", "-", $namaFitur);
+
+        //buat html
+        $fh = fopen("hasil/".$id_sistem."/".$namaAktor."/".$namaFitur.".html", 'w'); // or die("error");  
+        $stringData = "your html code php code goes here";   
+        fwrite($fh, $stringData);
+        fclose($fh);
+
+        
+      }
+    }
+    
+  }
+  //cari id sistem
+  //bikin folder utk sistem ybs, taruh di /hasil/...folder_sistem.../
+
+  //cari aktor tiap sistem
+  //bikin folder utk tiap aktor ybs
+
+  //cari fitur tiap aktor  
+  //cari view dari tiap fitur
+  //cari component view dari tiap fitur
+  //concate tiap component view sesuai urutan db
+  //bikin file html untuk tiap fitur ybs (isi titlenya, dll)
+
+  //compress folder sistem jadi .zip, taruh di /download/..... .zip
+
+
+  
+  
+
 }
 
 

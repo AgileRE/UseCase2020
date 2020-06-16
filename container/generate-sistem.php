@@ -68,21 +68,14 @@ $sistem = query("SELECT * FROM sistem");
                                             <td><?= $sis['nama_sistem']?></td>                                            
                                             <td>      
                                                 <?php if(cekPernahGenerate($sis['id_sistem'])): ?>   
-                                                    <a href="#" class="btn btn-sm btn-warning">Generate Ulang</a>
+                                                    <a href="proses-generate.php?id=<?= $sis['id_sistem'] ?>" class="btn btn-sm btn-warning">Generate Ulang</a>
                                                 <?php else: ?>
-                                                    <a href="#" class="btn btn-sm btn-success">Generate</a>
+                                                    <a href="proses-generate.php?id=<?= $sis['id_sistem'] ?>" class="btn btn-sm btn-success">Generate</a>
                                                 <?php endif ?>                                                                                       
                                             </td>                                           
                                         </tr>   
                                     <?php endforeach ?>
-                                        
-                                        <!-- <tr role="row" class="even">
-                                            <td class="sorting_1">2</td>
-                                            <td>Sistem Akademik Unair 2</td>
-                                            <td>                                                
-                                                <a href="#" class="btn btn-sm btn-warning">Generate Ulang</a>
-                                            </td>                                           
-                                        </tr>                                                                     -->
+
                                     </tbody>
                                     <tfoot>
                                         
