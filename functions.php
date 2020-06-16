@@ -435,6 +435,18 @@ function ubahComponent($data){
   return mysqli_affected_rows($conn);
 }
 
+function cekPernahGenerate($id_sistem){
+  $cek = query("SELECT * FROM `generate` WHERE id_sistem = '$id_sistem'");
+
+  $jumlahCek = count($cek);
+
+  if ($jumlahCek > 0){
+    return true;
+  }
+
+  return false;
+}
+
 
 function tambahAktor($data, $id_sistem){
     global $conn;

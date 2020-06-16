@@ -1,3 +1,11 @@
+<?php
+
+include('functions.php');
+
+$sistem = query("SELECT * FROM sistem");
+
+?>
+
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
@@ -6,7 +14,7 @@
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>                    
                     <li class="breadcrumb-item active">Generate Sistem</li>
                 </ol>
             </div><!-- /.col -->
@@ -52,21 +60,29 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    
+                                    <?php 
+                                    $i= 0;
+                                    foreach($sistem as $sis): ?>
                                         <tr role="row" class="odd">
-                                            <td class="sorting_1">1</td>
-                                            <td>Sistem Akademik Unair 1</td>
-                                            <td>                                                
-                                                <a href="#" class="btn btn-sm btn-success">Generate</a>
+                                            <td class="sorting_1"><?=++$i?></td>
+                                            <td><?= $sis['nama_sistem']?></td>                                            
+                                            <td>      
+                                                <?php if(cekPernahGenerate($sis['id_sistem'])): ?>   
+                                                    <a href="#" class="btn btn-sm btn-warning">Generate Ulang</a>
+                                                <?php else: ?>
+                                                    <a href="#" class="btn btn-sm btn-success">Generate</a>
+                                                <?php endif ?>                                                                                       
                                             </td>                                           
                                         </tr>   
-                                        <tr role="row" class="even">
+                                    <?php endforeach ?>
+                                        
+                                        <!-- <tr role="row" class="even">
                                             <td class="sorting_1">2</td>
                                             <td>Sistem Akademik Unair 2</td>
                                             <td>                                                
                                                 <a href="#" class="btn btn-sm btn-warning">Generate Ulang</a>
                                             </td>                                           
-                                        </tr>                                                                    
+                                        </tr>                                                                     -->
                                     </tbody>
                                     <tfoot>
                                         
