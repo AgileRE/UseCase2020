@@ -466,8 +466,10 @@ function rrmdir($dir) {
 function prosesGenerate($id_sistem){
   echo $id_sistem;
   $cek = query("SELECT * FROM `generate` WHERE id_sistem = '$id_sistem'");
-
+  $sistem = query("SELECT * FROM `sistem` WHERE id_sistem = '$id_sistem'");
   $aktor = query("SELECT * FROM `aktor` WHERE id_sistem = '$id_sistem'");
+
+  $namaSistem = $sistem[0]['nama_sistem'];
   
   
   $jumlahCek = count($cek);
@@ -491,7 +493,253 @@ function prosesGenerate($id_sistem){
 
         //buat html
         $fh = fopen("hasil/".$id_sistem."/".$namaAktor."/".$namaFitur.".html", 'w'); // or die("error");  
-        $stringData = "your html code php code goes here";   
+        $stringData = '
+        
+ 
+<!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+  <title>'.$namaSistem.'</title>
+    
+  <!-- Theme style -->
+  <link rel="stylesheet" href="https://dimassatria.tech/psi/adminlte.min.css">  
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars" aria-hidden="true"></i></a>
+      </li>
+    </ul>
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+            
+      <li class="nav-item">
+        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#"><i
+            class="fas fa-th-large"></i></a>
+      </li>
+    </ul>
+  </nav>
+  <!-- /.navbar -->
+  <!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="index3.html" class="brand-link">
+      <img src="https://dimassatria.tech/psi/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+           style="opacity: .8">
+      <span class="brand-text font-weight-light">'.$namaSistem.'</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="https://dimassatria.tech/psi/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block">User 1</a>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->          
+          <li class="nav-item">
+            <a href="index.php" class="nav-link active">              
+              <p>
+                Kelola Data Sistem
+                <!-- <span class="right badge badge-danger">New</span> -->
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="generate-sistem.php" class="nav-link ">              
+              <p>
+                Generate Sistem
+                <!-- <span class="right badge badge-danger">New</span> -->
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="hasil-generate.php" class="nav-link ">              
+              <p>
+                Hasil Generate
+                <!-- <span class="right badge badge-danger">New</span> -->
+              </p>
+            </a>
+          </li>
+
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark">Detail Aktor : Guru</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="index.php">Kelola Data Sistem</a></li>                    
+                    <li class="breadcrumb-item"><a href="detail-sistem.php?id=1">Detail Sistem : Sistem Satu</a></li> 
+                    <li class="breadcrumb-item active">Detail Aktor: Guru</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+
+<!-- Main content -->
+
+<div class="content">
+    <div class="container-fluid">
+
+    <div class="row">
+        <div class="col-12">
+            <dic class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Tambah Data Fitur</h3>
+                </div>
+
+                <div class="card-body">
+                    <form action="" method="post">
+                        <div class="form-group row">
+                            <label for="nama-fitur" class="col-sm-2 col-form-label">Nama Fitur</label>
+                            <div class="col-sm-10">
+                                <input name="nama-fitur" placeholder="Masukkan nama fitur..." type="text" class="form-control" id="nama-fitur">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <button class="btn btn-success btn-block" name="submit" type="submit">+ Tambah Data</button>
+                        </div>
+                    </form>
+                </div>
+            </dic>
+        </div>
+    </div>
+        <div class="row">
+        <div class="col-12">
+
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Tabel Data Fitur</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
+
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table id="example1" class="text-center table table-bordered table-striped dataTable" role="grid"
+                                    aria-describedby="example1_info">
+                                    <thead>
+                                        <tr role="row">
+                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1"
+                                                colspan="1" aria-sort="ascending"
+                                                aria-label="Rendering engine: activate to sort column descending"
+                                                style="width: 5px;">No</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+                                                colspan="1" aria-label="Browser: activate to sort column ascending"
+                                                style="width: 219px;">Nama Fitur</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+                                                colspan="1" aria-label="Platform(s): activate to sort column ascending"
+                                                style="width: 194px;">Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                                                            <tr role="row" class="even">
+                                            <td class="sorting_1">1</td>
+                                            <td>Menambahkan Mahasiswa</td>
+                                            <td>
+                                               
+                                                <a href="detail-fitur.php?id=1" class="btn btn-sm btn-info">Data Use Case Scenario</a>
+                                                <a href="component-view.php?id=1" class="btn btn-sm btn-secondary">Data Component View</a>
+                                                <a href="hapus-fitur.php?id=1" class="btn btn-sm btn-danger">Hapus</a>
+                                            </td>
+                                        </tr>
+                                                                            <tr role="row" class="odd">
+                                            <td class="sorting_1">2</td>
+                                            <td>Melihat Evaluasi</td>
+                                            <td>
+                                                
+                                                <a href="detail-fitur.php?id=2" class="btn btn-sm btn-info">Data Use Case Scenario</a>
+                                                <a href="component-view.php?id=2" class="btn btn-sm btn-secondary">Data Component View</a>
+                                                <a href="hapus-fitur.php?id=2" class="btn btn-sm btn-danger">Hapus</a>
+                                            </td>
+                                        </tr>
+                                                                        </tbody>
+                                    <tfoot>
+
+                                        <tr>
+                                            <th rowspan="1" colspan="1">No</th>
+                                            <th rowspan="1" colspan="1">Nama Fitur</th>
+                                            <th rowspan="1" colspan="1">Aksi</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                </div>
+                <!-- /.card-body -->
+            </div>
+
+        </div>
+        <!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+<!-- REQUIRED SCRIPTS -->
+
+
+<!-- jQuery -->
+<script src="https://dimassatria.tech/psi/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="https://dimassatria.tech/psi/bootstrap.bundle.min.js"></script> 
+<!-- AdminLTE App -->
+<script src="https://dimassatria.tech/psi/adminlte.min.js"></script>
+
+</body>
+</html>
+';   
         fwrite($fh, $stringData);
         fclose($fh);
 
