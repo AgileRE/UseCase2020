@@ -122,7 +122,6 @@ placeholder="1. ________
 <?php if($fitur[0]['scenario_normal'] != ''):?>
 <?= $fitur[0]['scenario_normal'] ?>
                 <?php endif ?>
-
 </textarea>
               </div>
               <div class="form-group">
@@ -134,7 +133,7 @@ placeholder="1. ________
 <?php if($fitur[0]['scenario_alternatif'] != ''):?>
 <?= $fitur[0]['scenario_alternatif'] ?>
                 <?php endif ?>
-                </textarea>
+</textarea>
               </div>
               <div class="form-group">
                 <label for="scenario-exception">Scenario Exception</label>
@@ -145,7 +144,7 @@ placeholder="1. ________
 <?php if($fitur[0]['scenario_exception'] != ''):?>
 <?= $fitur[0]['scenario_exception'] ?>
                 <?php endif ?>
-                </textarea>
+</textarea>
               </div>
 
               <button type="submit" name="submit" class="btn btn-success btn-block">Simpan dan ke Component View</button>

@@ -1,3 +1,10 @@
+<?php 
+
+include('functions.php');
+$hasil = query("SELECT * FROM `generate` INNER JOIN sistem ON sistem.id_sistem = generate.id_sistem");
+
+?>
+
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
@@ -55,23 +62,18 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    
+                                    <?php
+                                    $i =0;
+                                    foreach($hasil as $hsl): ?>
                                         <tr role="row" class="odd">
-                                            <td class="sorting_1">1</td>
-                                            <td>Sistem Akademik Unair 1</td>
-                                            <td>19 Oktober 2020</td>
+                                            <td class="sorting_1"><?=++$i?></td>
+                                            <td><?= $hsl['nama_sistem']?></td>
+                                            <td><?= $hsl['tanggal_generate']?></td>
                                             <td>                                                
-                                                <a href="#" class="btn btn-sm btn-success">Download (.zip)</a>
+                                                <a href="<?= $hsl['url_hasil']?>" class="btn btn-sm btn-success">Download (.zip)</a>
                                             </td>                                           
                                         </tr>   
-                                        <tr role="row" class="even">
-                                            <td class="sorting_1">2</td>
-                                            <td>Sistem Akademik Unair 2</td>
-                                            <td>12 Juni 2019</td>
-                                            <td>                                                
-                                                <a href="#" class="btn btn-sm btn-success">Download (.zip)</a>
-                                            </td>                                           
-                                        </tr>                                                                    
+                                    <?php endforeach ?>                                                                                                                                               
                                     </tbody>
                                     <tfoot>
                                         

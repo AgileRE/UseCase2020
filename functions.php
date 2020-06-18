@@ -463,8 +463,9 @@ function rrmdir($dir) {
   }
  }
 
-function prosesGenerate($id_sistem){
-  echo $id_sistem;
+function prosesGenerate($id_sistem){  
+
+  global $conn;
   $cek = query("SELECT * FROM `generate` WHERE id_sistem = '$id_sistem'");
   $sistem = query("SELECT * FROM `sistem` WHERE id_sistem = '$id_sistem'");
   $aktor = query("SELECT * FROM `aktor` WHERE id_sistem = '$id_sistem'");
@@ -476,33 +477,45 @@ function prosesGenerate($id_sistem){
 
   if ($jumlahCek > 0){ //kalau sudah ada datanya hapus dulu, baru buat ulang (generate ulang case )
     rrmdir("hasil/".$id_sistem);
-    mkdir("hasil/".$id_sistem);
-  } else {
-    mkdir("hasil/".$id_sistem);
-    foreach($aktor as $akt){      
-      mkdir(getcwd()."/hasil/".$id_sistem."/".$akt['nama_aktor']);
+  }
+  //cari id sistem
+  //bikin folder utk sistem ybs, taruh di /hasil/...folder_sistem.../
 
-      //cari fitur
-      $idAktor = $akt['id_aktor'];
-      $namaAktor = $akt['nama_aktor'];
-      $fitur = query("SELECT * FROM `fitur` WHERE id_aktor = '$idAktor'");
-      foreach($fitur as $fit){
-        $idFitur = $fit['id_fitur'];
-        $namaFitur = $fit['nama_fitur'];
-        $namaFileFitur = strtolower($namaFitur);
-        $namaFileFitur = str_replace(" ", "-", $namaFileFitur);
-        $namaFileFitur .= '.html';    
-        
-        $view = query("SELECT * FROM `view` WHERE id_fitur = $idFitur");
-        if (count($view) > 0){
-          $judulHalaman = $view[0]['title'];
-        } else {
-          $judulHalaman = '';
-        }     
+  //cari aktor tiap sistem
+  //bikin folder utk tiap aktor ybs
 
-        //buat html
-        $fh = fopen("hasil/".$id_sistem."/".$namaAktor."/".$namaFileFitur, 'w'); // or die("error");  
-        $bagianAtas = '        
+  //cari fitur tiap aktor  
+  //cari view dari tiap fitur
+  //cari component view dari tiap fitur
+  //concate tiap component view sesuai urutan db
+  //bikin file html untuk tiap fitur ybs (isi titlenya, dll)
+
+  //compress folder sistem jadi .zip, taruh di /download/..... .zip
+  mkdir("hasil/".$id_sistem);  
+  foreach($aktor as $akt){      
+    mkdir(getcwd()."/hasil/".$id_sistem."/".$akt['nama_aktor']);
+
+    //cari fitur
+    $idAktor = $akt['id_aktor'];
+    $namaAktor = $akt['nama_aktor'];
+    $fitur = query("SELECT * FROM `fitur` WHERE id_aktor = '$idAktor'");
+    foreach($fitur as $fit){
+      $idFitur = $fit['id_fitur'];
+      $namaFitur = $fit['nama_fitur'];
+      $namaFileFitur = strtolower($namaFitur);
+      $namaFileFitur = str_replace(" ", "-", $namaFileFitur);
+      $namaFileFitur .= '.html';    
+      
+      $view = query("SELECT * FROM `view` WHERE id_fitur = $idFitur");
+      if (count($view) > 0){
+        $judulHalaman = $view[0]['title'];
+      } else {
+        $judulHalaman = '';
+      }     
+
+      //buat html
+      $fh = fopen("hasil/".$id_sistem."/".$namaAktor."/".$namaFileFitur, 'w'); // or die("error");  
+      $bagianAtas = '        
 <!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
@@ -510,228 +523,228 @@ scratch. This page gets rid of all links and provides the needed markup only.
 -->
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>'.$judulHalaman.'</title>
-    
-  <!-- Theme style -->
-  <link rel="stylesheet" href="https://dimassatria.tech/psi/adminlte.min.css">  
-  <!-- Google Font: Source Sans Pro -->
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<title>'.$judulHalaman.'</title>
+  
+<!-- Theme style -->
+<link rel="stylesheet" href="https://dimassatria.tech/psi/adminlte.min.css">  
+<!-- Google Font: Source Sans Pro -->
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
 
-  <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-    <!-- Left navbar links -->
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars" aria-hidden="true"></i></a>
-      </li>
-    </ul>
-    <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
-            
-      <li class="nav-item">
-        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#"><i
-            class="fas fa-th-large"></i></a>
-      </li>
-    </ul>
-  </nav>
-  <!-- /.navbar -->
-  <!-- Main Sidebar Container -->
+<!-- Navbar -->
+<nav class="main-header navbar navbar-expand navbar-white navbar-light">
+  <!-- Left navbar links -->
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars" aria-hidden="true"></i></a>
+    </li>
+  </ul>
+  <!-- Right navbar links -->
+  <ul class="navbar-nav ml-auto">
+          
+    <li class="nav-item">
+      <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#"><i
+          class="fas fa-th-large"></i></a>
+    </li>
+  </ul>
+</nav>
+<!-- /.navbar -->
+<!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-    <a href="#" class="brand-link">
-      <img src="https://dimassatria.tech/psi/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-           style="opacity: .8">
-      <span class="brand-text font-weight-light">'.$namaSistem.'</span>
-    </a>
+  <!-- Brand Logo -->
+  <a href="#" class="brand-link">
+    <img src="https://dimassatria.tech/psi/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+         style="opacity: .8">
+    <span class="brand-text font-weight-light">'.$namaSistem.'</span>
+  </a>
 
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="https://dimassatria.tech/psi/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-        </div>
-        <div class="info">
-          <a href="#" class="d-block">'.$namaAktor.'</a>
-        </div>
-      </div>';
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <!-- Sidebar user panel (optional) -->
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      <div class="image">
+        <img src="https://dimassatria.tech/psi/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+      </div>
+      <div class="info">
+        <a href="#" class="d-block">'.$namaAktor.'</a>
+      </div>
+    </div>';
 
-      $bagianSidebar =
-      '<!-- Sidebar Menu -->
-      <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->'; 
+    $bagianSidebar =
+    '<!-- Sidebar Menu -->
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <!-- Add icons to the links using the .nav-icon class
+             with font-awesome or any other icon font library -->'; 
 
-      foreach($fitur as $fit2){  
-        $namaFileFitur2 = strtolower($fit2['nama_fitur']);
-        $namaFileFitur2 = str_replace(" ", "-", $namaFileFitur2);
-        $namaFileFitur2 .= '.html';   
-        if($namaFitur == $fit2['nama_fitur']){
-          $bagianSidebar .=
-          '<li class="nav-item">
-          <a href="'.$namaFileFitur2.'" class="nav-link active">              
-            <p>'
-            .$fit2['nama_fitur'].           
-            '</p>
-          </a>
-        </li>';
-        }else {
-          $bagianSidebar .=
+    foreach($fitur as $fit2){  
+      $namaFileFitur2 = strtolower($fit2['nama_fitur']);
+      $namaFileFitur2 = str_replace(" ", "-", $namaFileFitur2);
+      $namaFileFitur2 .= '.html';   
+      if($namaFitur == $fit2['nama_fitur']){
+        $bagianSidebar .=
         '<li class="nav-item">
-        <a href="'.$namaFileFitur2.'" class="nav-link">              
+        <a href="'.$namaFileFitur2.'" class="nav-link active">              
           <p>'
           .$fit2['nama_fitur'].           
           '</p>
         </a>
       </li>';
-        }
-        
+      }else {
+        $bagianSidebar .=
+      '<li class="nav-item">
+      <a href="'.$namaFileFitur2.'" class="nav-link">              
+        <p>'
+        .$fit2['nama_fitur'].           
+        '</p>
+      </a>
+    </li>';
       }
-         
+      
+    }
+       
 
-      $bagianSidebar .=
-      '</ul>
-      </nav>
-      <!-- /.sidebar-menu -->
-    </div>
-    <!-- /.sidebar -->
-  </aside>';
+    $bagianSidebar .=
+    '</ul>
+    </nav>
+    <!-- /.sidebar-menu -->
+  </div>
+  <!-- /.sidebar -->
+</aside>';
 
+
+$bagianContent = '<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
   
-  $bagianContent = '<!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    
 <div class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1 class="m-0 text-dark">'.$namaFitur.'</h1>
-            </div><!-- /.col -->           
-        </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
+  <div class="container-fluid">
+      <div class="row mb-2">
+          <div class="col-sm-6">
+              <h1 class="m-0 text-dark">'.$namaFitur.'</h1>
+          </div><!-- /.col -->           
+      </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
 </div>
 <!-- /.content-header -->
 
 <!-- Main content -->
 
 <div class="content">
-    <div class="container-fluid">
+  <div class="container-fluid">
 
-      <div class="row">
-          <div class="col-12">
-              <dic class="card">
-                  <div class="card-body">';
+    <div class="row">
+        <div class="col-12">
+            <dic class="card">
+                <div class="card-body">';
 
 
+                    
+                
+foreach($view as $vi){
+  $idView = $vi['id_view'];
+  $component_view = query("SELECT * FROM `component_view` WHERE id_view='$idView'");
+  
+  foreach($component_view as $comp){
+    $idComponent = $comp['id_component'];
+    if($comp['jenis_component'] == 'Form' ){
+      $info_form = query("SELECT * FROM `info_form` WHERE id_component_view ='$idComponent'");
+
+      if(count($info_form) > 0){
+        $labelForm = $info_form[0]['label_form'];
+        $tipeForm = $info_form[0]['tipe_form'];
+        $placeholderForm = $info_form[0]['placeholder_form'];
+
+        $bagianContent .= '
+        <div class="form-group row">
+            <label for="nama-fitur" class="col-sm-2 col-form-label">'.$labelForm.'</label>
+            <div class="col-sm-10">
+                <input placeholder="'.$placeholderForm.'" type="'.$tipeForm.'" class="form-control">
+            </div>
+        </div>
+        ';
+      }      
+    } elseif($comp['jenis_component'] == 'Tabel'){
+
+      $info_tabel = query("SELECT * FROM `info_tabel` WHERE id_component_view ='$idComponent'");
+
+      $htmlTabel = '
+      <table id="example1" class="mt-5 text-center table table-bordered table-striped dataTable" role="grid"
+      aria-describedby="example1_info">
+      <thead>
+          <tr role="row">';                
                       
-                  
-  foreach($view as $vi){
-    $idView = $vi['id_view'];
-    $component_view = query("SELECT * FROM `component_view` WHERE id_view='$idView'");
-    
-    foreach($component_view as $comp){
-      $idComponent = $comp['id_component'];
-      if($comp['jenis_component'] == 'Form' ){
-        $info_form = query("SELECT * FROM `info_form` WHERE id_component_view ='$idComponent'");
-
-        if(count($info_form) > 0){
-          $labelForm = $info_form[0]['label_form'];
-          $tipeForm = $info_form[0]['tipe_form'];
-          $placeholderForm = $info_form[0]['placeholder_form'];
-
-          $bagianContent .= '
-          <div class="form-group row">
-              <label for="nama-fitur" class="col-sm-2 col-form-label">'.$labelForm.'</label>
-              <div class="col-sm-10">
-                  <input placeholder="'.$placeholderForm.'" type="'.$tipeForm.'" class="form-control">
-              </div>
-          </div>
-          ';
-        }      
-      } elseif($comp['jenis_component'] == 'Tabel'){
-
-        $info_tabel = query("SELECT * FROM `info_tabel` WHERE id_component_view ='$idComponent'");
-
-        $htmlTabel = '
-        <table id="example1" class="mt-5 text-center table table-bordered table-striped dataTable" role="grid"
-        aria-describedby="example1_info">
-        <thead>
-            <tr role="row">';                
-                        
-        if(count($info_tabel) > 0){
-          $jumlahKolom = count($info_tabel);          
-          foreach($info_tabel as $info){
-            $namaKolom = $info['nama_kolom'];
-            $htmlTabel .= '
-            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1"
-                    colspan="1" aria-sort="ascending"
-                    aria-label="Rendering engine: activate to sort column descending"
-                    style="width: 5px;">'.$namaKolom.'
-            </th>
-            ';
-          }
-
+      if(count($info_tabel) > 0){
+        $jumlahKolom = count($info_tabel);          
+        foreach($info_tabel as $info){
+          $namaKolom = $info['nama_kolom'];
           $htmlTabel .= '
-          </tr>
-          </thead>
-          <tbody>';
+          <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1"
+                  colspan="1" aria-sort="ascending"
+                  aria-label="Rendering engine: activate to sort column descending"
+                  style="width: 5px;">'.$namaKolom.'
+          </th>
+          ';
+        }
 
-          $jumlahBaris = 5; //angka terserah
-          for ($i=0; $i < $jumlahBaris ; $i++) { 
-            $htmlTabel .= '<tr role="row" class="even">';
-            for ($j=0; $j < $jumlahKolom ; $j++) {     
-              $htmlTabel .= '<td>-</td>';
-            }
-            $htmlTabel .= '</tr>';
-          }
-                             
         $htmlTabel .= '
-        </tbody>
-      </table>
-          ';     
+        </tr>
+        </thead>
+        <tbody>';
 
-          $bagianContent .= $htmlTabel;         
-        }      
+        $jumlahBaris = 5; //angka terserah
+        for ($i=0; $i < $jumlahBaris ; $i++) { 
+          $htmlTabel .= '<tr role="row" class="even">';
+          for ($j=0; $j < $jumlahKolom ; $j++) {     
+            $htmlTabel .= '<td>-</td>';
+          }
+          $htmlTabel .= '</tr>';
+        }
+                           
+      $htmlTabel .= '
+      </tbody>
+    </table>
+        ';     
+
+        $bagianContent .= $htmlTabel;         
+      }      
+    
       
-        
-      } elseif($comp['jenis_component'] == 'Tombol'){
-        $info_tombol = query("SELECT * FROM `info_tombol` WHERE id_component_view ='$idComponent'");
-        
-        if(count($info_tombol) > 0){
-          $namaTombol = $info_tombol[0]['nama_tombol'];
-          $jenisTombol = $info_tombol[0]['jenis_tombol'];          
+    } elseif($comp['jenis_component'] == 'Tombol'){
+      $info_tombol = query("SELECT * FROM `info_tombol` WHERE id_component_view ='$idComponent'");
+      
+      if(count($info_tombol) > 0){
+        $namaTombol = $info_tombol[0]['nama_tombol'];
+        $jenisTombol = $info_tombol[0]['jenis_tombol'];          
 
-          $bagianContent .= '
-          <div class="row">
-              <button class="btn btn-'.$jenisTombol.' btn-block">'.$namaTombol.'</button>
-          </div>
-          ';          
-        }      
-      }
+        $bagianContent .= '
+        <div class="row">
+            <button class="btn btn-'.$jenisTombol.' btn-block">'.$namaTombol.'</button>
+        </div>
+        ';          
+      }      
     }
   }
-  $bagianContent .= '</div>
-              </dic>
-          </div>
-      </div>
-          
-    </div><!-- /.container-fluid -->
+}
+$bagianContent .= '</div>
+            </dic>
+        </div>
+    </div>
+        
+  </div><!-- /.container-fluid -->
 </div>
 <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
+</div>
+<!-- /.content-wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
 
@@ -749,32 +762,77 @@ scratch. This page gets rid of all links and provides the needed markup only.
 $stringData = $bagianAtas;
 $stringData .= $bagianSidebar; 
 $stringData .= $bagianContent;
-        fwrite($fh, $stringData);
-        fclose($fh);
+      fwrite($fh, $stringData);
+      fclose($fh);
 
+      
+    }
+  }
+  $folderToCompress = "hasil/".$id_sistem."/";
+  $folderTujuanZip = "download/".uniqid().".zip";
+
+  if(Zip($folderToCompress, $folderTujuanZip) != false){
+    $query = "INSERT INTO `generate` (id_sistem, url_hasil)
+    VALUES ('$id_sistem', '$folderTujuanZip')";
         
-      }
+    return mysqli_query($conn, $query);
+  } else {
+    return false;
+  }
+
+}
+
+function Zip($source, $destination)
+{
+  // echo $source;
+  // var_dump(file_exists($source));die;    
+    if (!extension_loaded('zip') || !file_exists($source)) {
+        return false;
     }
     
-  }
-  //cari id sistem
-  //bikin folder utk sistem ybs, taruh di /hasil/...folder_sistem.../
+    $zip = new ZipArchive();
+    if (!$zip->open($destination, ZIPARCHIVE::CREATE)) {
+        return false;
+    }
 
-  //cari aktor tiap sistem
-  //bikin folder utk tiap aktor ybs
-
-  //cari fitur tiap aktor  
-  //cari view dari tiap fitur
-  //cari component view dari tiap fitur
-  //concate tiap component view sesuai urutan db
-  //bikin file html untuk tiap fitur ybs (isi titlenya, dll)
-
-  //compress folder sistem jadi .zip, taruh di /download/..... .zip
+    $source = str_replace('\\', '/', $source);
 
 
-  
-  
+    if (is_dir($source) === true)
+    {
+        $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($source), RecursiveIteratorIterator::SELF_FIRST);
+    
+        foreach ($files as $file)
+        {
+            $file = str_replace('\\', '/', $file);
+           
 
+            // Ignore "." and ".." folders
+            if( in_array(substr($file, strrpos($file, '/')+1), array('.', '..')) )
+                continue;
+
+            // $file = realpath($file);
+           
+
+            if (is_dir($file) === true)
+            {
+                $namaFolder = str_replace($source . '/', '', $file . '/');
+                
+                $zip->addEmptyDir($namaFolder);
+            }
+            else if (is_file($file) === true)
+            {
+              $namaFile = str_replace($source . '/', '', $file);              
+              $zip->addFromString($namaFile, file_get_contents($file));
+            }
+        }
+    }
+    else if (is_file($source) === true)
+    {
+        $zip->addFromString(basename($source), file_get_contents($source));
+    }
+
+    return $zip->close();
 }
 
 
