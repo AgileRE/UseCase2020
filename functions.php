@@ -487,10 +487,18 @@ function prosesGenerate($id_sistem){
       $namaAktor = $akt['nama_aktor'];
       $fitur = query("SELECT * FROM `fitur` WHERE id_aktor = '$idAktor'");
       foreach($fitur as $fit){
+        $idFitur = $fit['id_fitur'];
         $namaFitur = $fit['nama_fitur'];
         $namaFileFitur = strtolower($namaFitur);
         $namaFileFitur = str_replace(" ", "-", $namaFileFitur);
-        $namaFileFitur .= '.html';        
+        $namaFileFitur .= '.html';    
+        
+        $view = query("SELECT * FROM `view` WHERE id_fitur = $idFitur");
+        if (count($view) > 0){
+          $judulHalaman = $view[0]['title'];
+        } else {
+          $judulHalaman = '';
+        }     
 
         //buat html
         $fh = fopen("hasil/".$id_sistem."/".$namaAktor."/".$namaFileFitur, 'w'); // or die("error");  
@@ -506,7 +514,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>'.$namaSistem.'</title>
+  <title>'.$judulHalaman.'</title>
     
   <!-- Theme style -->
   <link rel="stylesheet" href="https://dimassatria.tech/psi/adminlte.min.css">  
@@ -598,8 +606,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->
-  </aside>
-  <!-- Content Wrapper. Contains page content -->
+  </aside>';
+
+  
+  $bagianContent = '<!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     
@@ -607,16 +617,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Detail Aktor : Guru</h1>
-            </div><!-- /.col -->
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item"><a href="index.php">Kelola Data Sistem</a></li>                    
-                    <li class="breadcrumb-item"><a href="detail-sistem.php?id=1">Detail Sistem : Sistem Satu</a></li> 
-                    <li class="breadcrumb-item active">Detail Aktor: Guru</li>
-                </ol>
-            </div><!-- /.col -->
+                <h1 class="m-0 text-dark">'.$namaFitur.'</h1>
+            </div><!-- /.col -->           
         </div><!-- /.row -->
     </div><!-- /.container-fluid -->
 </div>
@@ -627,103 +629,104 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <div class="content">
     <div class="container-fluid">
 
-    <div class="row">
-        <div class="col-12">
-            <dic class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Tambah Data Fitur</h3>
-                </div>
-
-                <div class="card-body">
-                    <form action="" method="post">
-                        <div class="form-group row">
-                            <label for="nama-fitur" class="col-sm-2 col-form-label">Nama Fitur</label>
-                            <div class="col-sm-10">
-                                <input name="nama-fitur" placeholder="Masukkan nama fitur..." type="text" class="form-control" id="nama-fitur">
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <button class="btn btn-success btn-block" name="submit" type="submit">+ Tambah Data</button>
-                        </div>
-                    </form>
-                </div>
-            </dic>
-        </div>
-    </div>
-        <div class="row">
-        <div class="col-12">
+      <div class="row">
+          <div class="col-12">
+              <dic class="card">
+                  <div class="card-body">';
 
 
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Tabel Data Fitur</h3>
-                </div>
-                <!-- /.card-header -->
-                <div class="card-body">
-                    <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                      
+                  
+  foreach($view as $vi){
+    $idView = $vi['id_view'];
+    $component_view = query("SELECT * FROM `component_view` WHERE id_view='$idView'");
+    
+    foreach($component_view as $comp){
+      $idComponent = $comp['id_component'];
+      if($comp['jenis_component'] == 'Form' ){
+        $info_form = query("SELECT * FROM `info_form` WHERE id_component_view ='$idComponent'");
 
+        if(count($info_form) > 0){
+          $labelForm = $info_form[0]['label_form'];
+          $tipeForm = $info_form[0]['tipe_form'];
+          $placeholderForm = $info_form[0]['placeholder_form'];
 
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <table id="example1" class="text-center table table-bordered table-striped dataTable" role="grid"
-                                    aria-describedby="example1_info">
-                                    <thead>
-                                        <tr role="row">
-                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1"
-                                                colspan="1" aria-sort="ascending"
-                                                aria-label="Rendering engine: activate to sort column descending"
-                                                style="width: 5px;">No</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
-                                                colspan="1" aria-label="Browser: activate to sort column ascending"
-                                                style="width: 219px;">Nama Fitur</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
-                                                colspan="1" aria-label="Platform(s): activate to sort column ascending"
-                                                style="width: 194px;">Aksi</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                                                            <tr role="row" class="even">
-                                            <td class="sorting_1">1</td>
-                                            <td>Menambahkan Mahasiswa</td>
-                                            <td>
-                                               
-                                                <a href="detail-fitur.php?id=1" class="btn btn-sm btn-info">Data Use Case Scenario</a>
-                                                <a href="component-view.php?id=1" class="btn btn-sm btn-secondary">Data Component View</a>
-                                                <a href="hapus-fitur.php?id=1" class="btn btn-sm btn-danger">Hapus</a>
-                                            </td>
-                                        </tr>
-                                                                            <tr role="row" class="odd">
-                                            <td class="sorting_1">2</td>
-                                            <td>Melihat Evaluasi</td>
-                                            <td>
-                                                
-                                                <a href="detail-fitur.php?id=2" class="btn btn-sm btn-info">Data Use Case Scenario</a>
-                                                <a href="component-view.php?id=2" class="btn btn-sm btn-secondary">Data Component View</a>
-                                                <a href="hapus-fitur.php?id=2" class="btn btn-sm btn-danger">Hapus</a>
-                                            </td>
-                                        </tr>
-                                                                        </tbody>
-                                    <tfoot>
+          $bagianContent .= '
+          <div class="form-group row">
+              <label for="nama-fitur" class="col-sm-2 col-form-label">'.$labelForm.'</label>
+              <div class="col-sm-10">
+                  <input placeholder="'.$placeholderForm.'" type="'.$tipeForm.'" class="form-control">
+              </div>
+          </div>
+          ';
+        }      
+      } elseif($comp['jenis_component'] == 'Tabel'){
 
-                                        <tr>
-                                            <th rowspan="1" colspan="1">No</th>
-                                            <th rowspan="1" colspan="1">Nama Fitur</th>
-                                            <th rowspan="1" colspan="1">Aksi</th>
-                                        </tr>
-                                    </tfoot>
-                                </table>
-                            </div>
-                        </div>
+        $info_tabel = query("SELECT * FROM `info_tabel` WHERE id_component_view ='$idComponent'");
 
-                    </div>
-                </div>
-                </div>
-                <!-- /.card-body -->
-            </div>
+        $htmlTabel = '
+        <table id="example1" class="mt-5 text-center table table-bordered table-striped dataTable" role="grid"
+        aria-describedby="example1_info">
+        <thead>
+            <tr role="row">';                
+                        
+        if(count($info_tabel) > 0){
+          $jumlahKolom = count($info_tabel);          
+          foreach($info_tabel as $info){
+            $namaKolom = $info['nama_kolom'];
+            $htmlTabel .= '
+            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1"
+                    colspan="1" aria-sort="ascending"
+                    aria-label="Rendering engine: activate to sort column descending"
+                    style="width: 5px;">'.$namaKolom.'
+            </th>
+            ';
+          }
 
-        </div>
-        <!-- /.row -->
+          $htmlTabel .= '
+          </tr>
+          </thead>
+          <tbody>';
+
+          $jumlahBaris = 5; //angka terserah
+          for ($i=0; $i < $jumlahBaris ; $i++) { 
+            $htmlTabel .= '<tr role="row" class="even">';
+            for ($j=0; $j < $jumlahKolom ; $j++) {     
+              $htmlTabel .= '<td>-</td>';
+            }
+            $htmlTabel .= '</tr>';
+          }
+                             
+        $htmlTabel .= '
+        </tbody>
+      </table>
+          ';     
+
+          $bagianContent .= $htmlTabel;         
+        }      
+      
+        
+      } elseif($comp['jenis_component'] == 'Tombol'){
+        $info_tombol = query("SELECT * FROM `info_tombol` WHERE id_component_view ='$idComponent'");
+        
+        if(count($info_tombol) > 0){
+          $namaTombol = $info_tombol[0]['nama_tombol'];
+          $jenisTombol = $info_tombol[0]['jenis_tombol'];          
+
+          $bagianContent .= '
+          <div class="row">
+              <button class="btn btn-'.$jenisTombol.' btn-block">'.$namaTombol.'</button>
+          </div>
+          ';          
+        }      
+      }
+    }
+  }
+  $bagianContent .= '</div>
+              </dic>
+          </div>
+      </div>
+          
     </div><!-- /.container-fluid -->
 </div>
 <!-- /.content -->
@@ -745,6 +748,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 ';  
 $stringData = $bagianAtas;
 $stringData .= $bagianSidebar; 
+$stringData .= $bagianContent;
         fwrite($fh, $stringData);
         fclose($fh);
 
