@@ -41,34 +41,52 @@ Terdapat 2 jenis konsep yang harus dipahami :
 
     >Pada aplikasi ini disediakan beberapa jenis Component View yang sering digunakan, yaitu :
  
-        Jenis Component | Format Penulisan
-        ------------ | -------------
-        Form | #form_nama_component
-        Tabel | #tabel_nama_component
-        Tombol | #tombol_nama_component
+    Jenis Component | Format Penulisan
+    ------------ | -------------
+    Form | #form_nama_component
+    Tabel | #tabel_nama_component
+    Tombol | #tombol_nama_component
 
-    Sistem akan meng-*generate* UI dengan hasil akhir berupa file berekstensi .zip. Di dalamnya terdapat folder :
+    Kami menggunakan aturan standar HTML dan CSS Bootstrap 4 untuk kustommisasi Component View. Diantaranya kustomisasi *Tipe Form* untuk mengatur input type dari form tersebut dan *Tipe Tombol* untuk mengatur warna dari tombol yang akan dibuat.
 
-    >hasil/id_sistem/
+    Berikut ini Tipe Form dan Tipe Tombol yang dapat dibuat (beradasarkan dokumentasi resmi dari Bootstrap dan W3Schools):
 
-    Di dalam folder tersebut akan terdapat folder lagi sesuai nama aktor dan sejumlah aktor yang dimiliki oleh sistem tersebut. Jadi apabila sistem kita memiliki 2 aktor yakni *Aktor* 1 dan *Aktor 2* maka struktur folder akan terlihat seperti ini :
+    ![Image of Dokumentasi](https://raw.githubusercontent.com/AgileRE/UseCase2020/master/dokumentasi/14.png)
 
-    >hasil/id_sistem/Aktor 1
-    >hasil/id_sistem/Aktor 2
-
-    Di dalam folder tiap aktor, akan berisi file-file *User Interface* hasil generate dengan format html. Sehingga kurang lebih akan tampak seperti ini :
+    ![Image of Dokumentasi](https://raw.githubusercontent.com/AgileRE/UseCase2020/master/dokumentasi/15.png)
     
-    >hasil/id_sistem/Aktor 1/fitur1.html
-    >hasil/id_sistem/Aktor 1/fitur2.html
-    >hasil/id_sistem/Aktor 1/fitur3.html
-    >hasil/id_sistem/Aktor 1/fiturN.html
 
-    >hasil/id_sistem/Aktor 2/fitur1.html
-    >hasil/id_sistem/Aktor 2/fitur2.html
-    >hasil/id_sistem/Aktor 2/fitur3.html
-    >hasil/id_sistem/Aktor 2/fiturN.html
+Sistem akan meng-*generate* UI dengan hasil akhir berupa file berekstensi .zip. Di dalamnya terdapat folder :
 
-    File-fila hasil generate tersebut akan disimpan pada folder *UseCase2020/hasil/* sehingga anda bisa mengaksesnya melalui link http://localhost/UseCase2020/hasil/. Sedangkan untuk file .zip akan disimpan di folder *UseCase2020/download/* sehingga anda bisa mengaksesnya melalui link http://localhost/UseCase2020/download/.
+>hasil/id_sistem/
+
+Di dalam folder tersebut akan terdapat folder lagi sesuai nama aktor dan sejumlah aktor yang dimiliki oleh sistem tersebut. Jadi apabila sistem kita memiliki 2 aktor yakni *Aktor* 1 dan *Aktor 2* maka struktur folder akan terlihat seperti ini :
+
+>hasil/id_sistem/Aktor 1
+
+>hasil/id_sistem/Aktor 2
+
+Di dalam folder tiap aktor, akan berisi file-file *User Interface* hasil generate dengan format html. Sehingga kurang lebih akan tampak seperti ini :
+
+>hasil/id_sistem/Aktor 1/fitur1.html
+
+>hasil/id_sistem/Aktor 1/fitur2.html
+
+>hasil/id_sistem/Aktor 1/fitur3.html
+
+>hasil/id_sistem/Aktor 1/fiturN.html
+
+>hasil/id_sistem/Aktor 2/fitur1.html
+
+>hasil/id_sistem/Aktor 2/fitur2.html
+
+>hasil/id_sistem/Aktor 2/fitur3.html
+
+>hasil/id_sistem/Aktor 2/fiturN.html
+
+File-file hasil generate tersebut akan disimpan pada folder *UseCase2020/hasil/* sehingga anda bisa mengaksesnya melalui link http://localhost/UseCase2020/hasil/. 
+
+Sedangkan untuk file .zip akan disimpan di folder *UseCase2020/download/* sehingga anda bisa mengaksesnya melalui link http://localhost/UseCase2020/download/.
 
 # Cara Penginstalan
 Berikut ini adalah langkah-langkah untuk menginstal Aplikasi UseCase 2020 :
@@ -82,8 +100,9 @@ Berikut ini adalah langkah-langkah untuk menginstal Aplikasi UseCase 2020 :
 7. Import file sql *usecase_psi.sql* yang terletak di folder *UseCase2020*
 8. Akses aplikasi melalui http://localhost/UseCase2020/
 
-Apabila tidak ada kesalahan maka aplikasi akan tampil seperti pada gambar di bawah ini
-![Image of Yaktocat](https://octodex.github.com/images/yaktocat.png)
+Apabila tidak ada kesalahan maka aplikasi akan tampil seperti pada gambar di bawah ini :
+
+![Image of Dokumentasi](https://raw.githubusercontent.com/AgileRE/UseCase2020/master/dokumentasi/1.png)
 
 
 # Cara Penggunaan
@@ -91,15 +110,47 @@ Tutorial ini akan dilakukan mulai tahap dari awal pembuatan sistem hingga berhas
 
 Berikut ini cara penggunaan Aplikasi UseCase 2020 :
 1. Buat sistem dengan memasukkan nama sistem
+
+![Image of Dokumentasi](https://raw.githubusercontent.com/AgileRE/UseCase2020/master/dokumentasi/2.png)
+![Image of Dokumentasi](https://raw.githubusercontent.com/AgileRE/UseCase2020/master/dokumentasi/3.png)
+
 2. Buat aktor pada sistem yang telah dibuat, ingat bahwa satu sistem dapat terdiri dari beberapa aktor
+
+![Image of Dokumentasi](https://raw.githubusercontent.com/AgileRE/UseCase2020/master/dokumentasi/4.png)
+
 3. Untuk setiap aktor kita bisa membuat fitur sesuai keinginan
+
+![Image of Dokumentasi](https://raw.githubusercontent.com/AgileRE/UseCase2020/master/dokumentasi/5.png)
+
 4. Lengkapi Use Case Scenario sesuai dengan konsep dasar yang telah dijelaskan di bagian "Cara Kerja Aplikasi" lalu tekan tombol *Simpan dan Ke Component View*
+
+![Image of Dokumentasi](https://raw.githubusercontent.com/AgileRE/UseCase2020/master/dokumentasi/6.png)
+![Image of Dokumentasi](https://raw.githubusercontent.com/AgileRE/UseCase2020/master/dokumentasi/7.png)
+
 5. Maka tampil halaman Component View dan sudah otomatis mengambil component-component yang kita sebutkan pada Use Case Scenario.
-6. Lengkapi atau ubah Component View klik Ubah
-7. Isikan pengaturan sesuai dengan yang anda inginkan
-8. Setelah melengkapi semuanya saatnya untuk mengenerate sistem, akses dengan klik fitur Generate Sistem pada sidebar sebelah kiri
-9. Lalu klik Generate pada sistem yang diinginkan
-10. Download file .zip dengan klik fitur Hasil Generate dan download pada sistem yang diinginkan
+
+![Image of Dokumentasi](https://raw.githubusercontent.com/AgileRE/UseCase2020/master/dokumentasi/8.png)
+
+6. Lengkapi atau ubah Component View klik Ubah dan pengaturan sesuai dengan yang anda inginkan
+
+![Image of Dokumentasi](https://raw.githubusercontent.com/AgileRE/UseCase2020/master/dokumentasi/9.png)
+
+7. Setelah melengkapi semuanya saatnya untuk mengenerate sistem, akses dengan klik fitur Generate Sistem pada sidebar sebelah kiri
+
+![Image of Dokumentasi](https://raw.githubusercontent.com/AgileRE/UseCase2020/master/dokumentasi/10.png)
+
+8. Lalu klik Generate pada sistem yang diinginkan. Setelah klik Generate maka tombol akan berubah menjadi berwarna kuning
+
+![Image of Dokumentasi](https://raw.githubusercontent.com/AgileRE/UseCase2020/master/dokumentasi/11.png)
+
+9. Download file .zip dengan klik fitur Hasil Generate dan download pada sistem yang diinginkan
+
+![Image of Dokumentasi](https://raw.githubusercontent.com/AgileRE/UseCase2020/master/dokumentasi/12.png)
+
+10. Buka hasil generate UI
+
+![Image of Dokumentasi](https://raw.githubusercontent.com/AgileRE/UseCase2020/master/dokumentasi/13.png)
+
 
 
 
