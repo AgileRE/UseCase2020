@@ -1,7 +1,9 @@
  
 <?php 
 $page = 1;
-
+if(!isset($_GET['id'])){
+  header("Location: index.php");
+}
 
 
 include('component/header.php') ?>

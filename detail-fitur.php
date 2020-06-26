@@ -1,5 +1,10 @@
  
 <?php 
+
+if(!isset($_GET['id'])){
+  header("Location: index.php");
+}
+
 $page = 1;
 include('component/header.php') ?>
 

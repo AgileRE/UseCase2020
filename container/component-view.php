@@ -29,6 +29,7 @@
         $title =$view[0]['title'];
     }
     $component_view = query("SELECT id_component, nama_component, jenis_component FROM `component_view` INNER JOIN `view` ON component_view.id_view = view.id_view INNER JOIN `fitur` ON fitur.id_fitur = view.id_fitur WHERE fitur.id_fitur ='$id_fitur'");    
+    
     $id_fitur = $_GET['id'];
     
 

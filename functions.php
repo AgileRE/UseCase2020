@@ -93,12 +93,14 @@ function tambahScenario($data, $id_fitur){
     foreach ($arraySN as $key => $value) {
       $pecah = explode(" ",$value);
 
+     
       foreach ($pecah as $key2 => $value2) {
-        # code...
+        
+        
         if (strpos($value2, '#') !== false) {
           //ambil id @view yang barusan dimasukkan
           //masukkan id view dan nama_component ke tabel component_view   
-
+          
           $index_underscore = strpos($value2, '_');
           $tipe_component = substr($value2, 0, $index_underscore);
           
@@ -113,7 +115,7 @@ function tambahScenario($data, $id_fitur){
           }          
           
 
-          $sql = "SELECT * FROM `component_view` WHERE nama_component = '$value2'";
+          $sql = "SELECT * FROM `component_view` WHERE nama_component = '$value2' AND id_view = '$id_view'";              
           $jumlahRecord = count(query($sql));
           
           if ($jumlahRecord == 0){
@@ -141,7 +143,7 @@ function tambahScenario($data, $id_fitur){
 
           $sql = "SELECT * FROM `view` WHERE id_fitur = '$id_fitur'";
           $jumlahRecord = count(query($sql));
-
+          
           if ($jumlahRecord > 0){
             $sql = "UPDATE `view` SET nama_view = '$value2' WHERE id_fitur = '$id_fitur'";
             mysqli_query($conn, $sql);
@@ -166,7 +168,7 @@ function tambahScenario($data, $id_fitur){
     }    
 
     foreach ($arraySA as $key => $value) {
-      $pecah = explode(" ",$value);
+      $pecah = explode(" ",$value);      
 
       foreach ($pecah as $key2 => $value2) {
         # code...
@@ -188,14 +190,15 @@ function tambahScenario($data, $id_fitur){
             $tipe_fix = 'Belum ditentukan';
           }          
           
-          $sql = "SELECT * FROM `component_view` WHERE nama_component = '$value2'";
+          $sql = "SELECT * FROM `component_view` WHERE nama_component = '$value2' AND id_view = '$id_view'";
           $jumlahRecord = count(query($sql));
+          
           
           if ($jumlahRecord == 0){
             // echo "Masukkan ".$value2." ke tabel component view";      
             // echo "<br>";
 
-            $sql = "INSERT INTO `component_view` (id_view, nama_component, jenis_component) VALUES ('$id_view', '$value2','$tipe_fix')";
+            $sql = "INSERT INTO `component_view` (id_view, nama_component, jenis_component) VALUES ('$id_view', '$value2','$tipe_fix')";            
             mysqli_query($conn, $sql);
           }
           
@@ -203,6 +206,7 @@ function tambahScenario($data, $id_fitur){
       }
   
     }
+    
 
     //tiap baris di textarea scenarioException divek apakah punya @halaman_view
     foreach ($arraySE as $key => $value) {
@@ -261,7 +265,7 @@ function tambahScenario($data, $id_fitur){
             $tipe_fix = 'Belum ditentukan';
           }          
                     
-          $sql = "SELECT * FROM `component_view` WHERE nama_component = '$value2'";
+          $sql = "SELECT * FROM `component_view` WHERE nama_component = '$value2' AND id_view = '$id_view'";
           $jumlahRecord = count(query($sql));
           
           if ($jumlahRecord == 0){
@@ -269,6 +273,7 @@ function tambahScenario($data, $id_fitur){
             // echo "<br>";
 
             $sql = "INSERT INTO `component_view` (id_view, nama_component, jenis_component) VALUES ('$id_view', '$value2', '$tipe_fix')";
+            
             mysqli_query($conn, $sql);
           }
           
@@ -478,6 +483,7 @@ function prosesGenerate($id_sistem){
   if ($jumlahCek > 0){ //kalau sudah ada datanya hapus dulu, baru buat ulang (generate ulang case )
     rrmdir("hasil/".$id_sistem);
   }
+  
   //cari id sistem
   //bikin folder utk sistem ybs, taruh di /hasil/...folder_sistem.../
 
@@ -593,7 +599,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       if($namaFitur == $fit2['nama_fitur']){
         $bagianSidebar .=
         '<li class="nav-item">
-        <a href="'.$namaFileFitur2.'" class="nav-link active">              
+        <a href="'.$namaFileFitur2.'" style="background-color:#E11584" class="nav-link active">              
           <p>'
           .$fit2['nama_fitur'].           
           '</p>
@@ -770,7 +776,7 @@ $stringData .= $bagianContent;
   }
   $folderToCompress = "hasil/".$id_sistem."/";
   $folderTujuanZip = "download/".uniqid().".zip";
-
+  // var_dump($folderTujuanZip);die;
   if(Zip($folderToCompress, $folderTujuanZip) != false){
     $query = "INSERT INTO `generate` (id_sistem, url_hasil)
     VALUES ('$id_sistem', '$folderTujuanZip')";
