@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 12 Jun 2020 pada 03.06
+-- Waktu pembuatan: 26 Jun 2020 pada 04.26
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.3
 
@@ -39,9 +39,8 @@ CREATE TABLE `aktor` (
 --
 
 INSERT INTO `aktor` (`id_aktor`, `nama_aktor`, `id_sistem`) VALUES
-(1, 'Guru', 1),
-(2, 'Karyawano', 1),
-(3, 'Siswa', 1);
+(16, 'Mahasiswa', 10),
+(17, 'Dosen', 10);
 
 -- --------------------------------------------------------
 
@@ -55,6 +54,15 @@ CREATE TABLE `component_view` (
   `nama_component` varchar(30) NOT NULL,
   `jenis_component` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `component_view`
+--
+
+INSERT INTO `component_view` (`id_component`, `id_view`, `nama_component`, `jenis_component`) VALUES
+(88, 16, '#form_nim', 'Form'),
+(89, 16, '#form_password', 'Form'),
+(90, 16, '#tombol_login', 'Tombol');
 
 -- --------------------------------------------------------
 
@@ -79,9 +87,8 @@ CREATE TABLE `fitur` (
 --
 
 INSERT INTO `fitur` (`id_fitur`, `nama_fitur`, `deskripsi`, `kondisi_awal`, `kondisi_akhir`, `scenario_normal`, `scenario_alternatif`, `scenario_exception`, `id_aktor`) VALUES
-(1, 'Menambahkan Mahasiswa', 'Fitur ini untuk menilai siswa secara individu', 'Awal1', 'Akhir1', '1. Membuka tampilan @halaman_login_admin\r\n2. Mengisikan #form_username dan #form_password\r\n3. Menekan #tombol_login @halaman_lala', '1. #form_a', '1. #form_ex', 1),
-(2, 'Melihat Evaluasi', '', '', '', '', '', '', 1),
-(6, 'Melihat Informasi Gaji', 'Ini deskripsi', 'awal', 'akhir', '1. Buka dashboard karyawan\r\n2. Pilih pada sidebar fitur klik menu &quot;Melihat Informasi Gaji&quot;\r\n3. Akan terbuka @halaman_informasi_gaji\r\n4. Pada @halaman_informasi_gaji, akan terdapat info gaji saat ini dan #tabel_gaji_perbulan', '', '', 2);
+(19, 'Melihat Mata Kuliah', '', '', '', '', '', '', 16),
+(20, 'Login', 'Fitur yang digunakan untuk login ke dashboard mahasiswa', 'Mahasiswa belum login', 'Mahasiswa sudah login ke dashboard', '1. Mahasiswa membuka @halaman_login_mahasiswa\r\n2. Mahasiswa login menggunakan nim dan password dengan mengisi #form_nim dan #form_password\r\n3. Mahasiswa mengklik #tombol_login', '', '', 16);
 
 -- --------------------------------------------------------
 
@@ -92,8 +99,16 @@ INSERT INTO `fitur` (`id_fitur`, `nama_fitur`, `deskripsi`, `kondisi_awal`, `kon
 CREATE TABLE `generate` (
   `id_generate` int(11) NOT NULL,
   `id_sistem` int(11) NOT NULL,
-  `url_hasil` varchar(100) NOT NULL
+  `url_hasil` varchar(100) NOT NULL,
+  `tanggal_generate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `generate`
+--
+
+INSERT INTO `generate` (`id_generate`, `id_sistem`, `url_hasil`, `tanggal_generate`) VALUES
+(36, 10, 'download/5ef5561c7082e.zip', '2020-06-26 01:57:48');
 
 -- --------------------------------------------------------
 
@@ -108,6 +123,14 @@ CREATE TABLE `info_form` (
   `tipe_form` varchar(50) NOT NULL,
   `placeholder_form` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `info_form`
+--
+
+INSERT INTO `info_form` (`id_info_form`, `id_component_view`, `label_form`, `tipe_form`, `placeholder_form`) VALUES
+(32, 88, 'NIM Anda', 'text', 'Masukkan nim...'),
+(33, 89, 'Password', 'password', 'Masukkan password anda...');
 
 -- --------------------------------------------------------
 
@@ -134,6 +157,13 @@ CREATE TABLE `info_tombol` (
   `jenis_tombol` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data untuk tabel `info_tombol`
+--
+
+INSERT INTO `info_tombol` (`id_nama_tombol`, `id_component_view`, `nama_tombol`, `jenis_tombol`) VALUES
+(16, 90, 'Login', 'primary');
+
 -- --------------------------------------------------------
 
 --
@@ -150,10 +180,7 @@ CREATE TABLE `sistem` (
 --
 
 INSERT INTO `sistem` (`id_sistem`, `nama_sistem`) VALUES
-(1, 'Sistem Satu'),
-(2, 'Sistem Dua'),
-(3, 'Sistem Tiga'),
-(4, 'Sistem Empat');
+(10, 'SIM Universitas');
 
 -- --------------------------------------------------------
 
@@ -173,8 +200,7 @@ CREATE TABLE `view` (
 --
 
 INSERT INTO `view` (`id_view`, `id_fitur`, `nama_view`, `title`) VALUES
-(9, 1, '@halaman_lala', 'Halaman Kelola Data Mahasiswa'),
-(10, 6, '@halaman_informasi_gaji,', 'Lihat Informasi Gaji');
+(16, 20, '@halaman_login_mahasiswa', '');
 
 --
 -- Indexes for dumped tables
@@ -192,7 +218,7 @@ ALTER TABLE `aktor`
 --
 ALTER TABLE `component_view`
   ADD PRIMARY KEY (`id_component`),
-  ADD KEY `id_view` (`id_view`);
+  ADD KEY `component_view_ibfk_1` (`id_view`);
 
 --
 -- Indeks untuk tabel `fitur`
@@ -206,7 +232,7 @@ ALTER TABLE `fitur`
 --
 ALTER TABLE `generate`
   ADD PRIMARY KEY (`id_generate`),
-  ADD KEY `id_sistem` (`id_sistem`);
+  ADD KEY `generate_ibfk_1` (`id_sistem`);
 
 --
 -- Indeks untuk tabel `info_form`
@@ -240,7 +266,7 @@ ALTER TABLE `sistem`
 --
 ALTER TABLE `view`
   ADD PRIMARY KEY (`id_view`),
-  ADD KEY `id_fitur` (`id_fitur`);
+  ADD KEY `view_ibfk_1` (`id_fitur`);
 
 --
 -- AUTO_INCREMENT untuk tabel yang dibuang
@@ -250,55 +276,55 @@ ALTER TABLE `view`
 -- AUTO_INCREMENT untuk tabel `aktor`
 --
 ALTER TABLE `aktor`
-  MODIFY `id_aktor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_aktor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT untuk tabel `component_view`
 --
 ALTER TABLE `component_view`
-  MODIFY `id_component` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id_component` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 
 --
 -- AUTO_INCREMENT untuk tabel `fitur`
 --
 ALTER TABLE `fitur`
-  MODIFY `id_fitur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_fitur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT untuk tabel `generate`
 --
 ALTER TABLE `generate`
-  MODIFY `id_generate` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_generate` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT untuk tabel `info_form`
 --
 ALTER TABLE `info_form`
-  MODIFY `id_info_form` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_info_form` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT untuk tabel `info_tabel`
 --
 ALTER TABLE `info_tabel`
-  MODIFY `id_kolom_tabel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_kolom_tabel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT untuk tabel `info_tombol`
 --
 ALTER TABLE `info_tombol`
-  MODIFY `id_nama_tombol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_nama_tombol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT untuk tabel `sistem`
 --
 ALTER TABLE `sistem`
-  MODIFY `id_sistem` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_sistem` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT untuk tabel `view`
 --
 ALTER TABLE `view`
-  MODIFY `id_view` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_view` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
@@ -308,25 +334,25 @@ ALTER TABLE `view`
 -- Ketidakleluasaan untuk tabel `aktor`
 --
 ALTER TABLE `aktor`
-  ADD CONSTRAINT `aktor_ibfk_1` FOREIGN KEY (`id_sistem`) REFERENCES `sistem` (`id_sistem`);
+  ADD CONSTRAINT `aktor_ibfk_1` FOREIGN KEY (`id_sistem`) REFERENCES `sistem` (`id_sistem`) ON DELETE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `component_view`
 --
 ALTER TABLE `component_view`
-  ADD CONSTRAINT `component_view_ibfk_1` FOREIGN KEY (`id_view`) REFERENCES `view` (`id_view`);
+  ADD CONSTRAINT `component_view_ibfk_1` FOREIGN KEY (`id_view`) REFERENCES `view` (`id_view`) ON DELETE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `fitur`
 --
 ALTER TABLE `fitur`
-  ADD CONSTRAINT `fitur_ibfk_1` FOREIGN KEY (`id_aktor`) REFERENCES `aktor` (`id_aktor`);
+  ADD CONSTRAINT `fitur_ibfk_1` FOREIGN KEY (`id_aktor`) REFERENCES `aktor` (`id_aktor`) ON DELETE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `generate`
 --
 ALTER TABLE `generate`
-  ADD CONSTRAINT `generate_ibfk_1` FOREIGN KEY (`id_sistem`) REFERENCES `sistem` (`id_sistem`);
+  ADD CONSTRAINT `generate_ibfk_1` FOREIGN KEY (`id_sistem`) REFERENCES `sistem` (`id_sistem`) ON DELETE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `info_form`
@@ -350,7 +376,7 @@ ALTER TABLE `info_tombol`
 -- Ketidakleluasaan untuk tabel `view`
 --
 ALTER TABLE `view`
-  ADD CONSTRAINT `view_ibfk_1` FOREIGN KEY (`id_fitur`) REFERENCES `fitur` (`id_fitur`);
+  ADD CONSTRAINT `view_ibfk_1` FOREIGN KEY (`id_fitur`) REFERENCES `fitur` (`id_fitur`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
