@@ -15,6 +15,8 @@ Berdasarkan penjelasan sebelumnya, cara untuk menggunakan use case adalah sebaga
 # Tentang Aplikasi UseCase2020
 Aplikasi UseCase2020 merupakan aplikasi yang dapat digunakan untuk men-*generate* data use case menjadi sebuah *User Interface* atau UI yang berbasis HTML dan CSS. Aplikasi ini berbasis web menggunakan Bahasa Pemrograman PHP, Bootstrap 4, Template Dashboard AdminLTE3, dan database MySQl.
 
+Demo aplikasi : https://dimassatria.tech/UseCase2020/
+
 # Cara Kerja Aplikasi
 Pada aplikasi ini anda akan diminta untuk memasukkan data-data usecase. Data-data tersebut meliputi :
 * Nama Sistem
